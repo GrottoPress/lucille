@@ -1,0 +1,27 @@
+name: lucille
+version: 0.1.0
+description: Utilities for Lucky framework
+
+authors:
+  - GrottoPress <info@grottopress.com>
+  - N Atta Kusi Adusei
+
+license: MIT
+
+crystal: ~> 1.0
+
+dependencies:
+  pawn:
+    github: GrottoPress/pawn
+    version: ~> 0.1.0
+
+development_dependencies:
+  carbon:
+    github: luckyframework/carbon
+    version: ~> 0.2.0
+  lucky:
+    github: luckyframework/lucky
+    version: ~> 0.28.0
+  webmock:
+    github: manastech/webmock.cr
+    version: ~> 0.14.0
