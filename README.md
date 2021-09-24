@@ -51,6 +51,7 @@
   - `.validate_email`
   - `.validate_domain`
   - `.validate_domain_label`
+  - `.validate_foreign_key`
   - `.validate_http_url`
   - `.validate_ip`
   - `.validate_ip4`
@@ -59,7 +60,6 @@
   - `.validate_negative_number`
   - `.validate_not_pwned`
   - `.validate_positive_number`
-  - `.validate_primary_key`
   - `.validate_slug`
   - `.validate_url`
   - `.validate_username`

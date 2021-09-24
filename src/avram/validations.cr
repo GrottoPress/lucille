@@ -224,7 +224,7 @@ module Avram
       end
     end
 
-    def validate_primary_key(
+    def validate_foreign_key(
       attribute,
       *,
       query : Queryable,
@@ -237,13 +237,13 @@ module Avram
       end
     end
 
-    def validate_primary_key(
+    def validate_foreign_key(
       attribute,
       *,
       query : Queryable.class,
       message : Attribute::ErrorMessage = "does not exist"
     )
-      validate_primary_key(attribute, query: query.new, message: message)
+      validate_foreign_key(attribute, query: query.new, message: message)
     end
 
     def validate_not_pwned(
