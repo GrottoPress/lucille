@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased] - 
 
+### Added
+- Add support for *Crystal* v1.2
+
 ### Changed
 - Rename `Avram::Validations.validate_primary_key` to `.validate_foreign_key`
 
