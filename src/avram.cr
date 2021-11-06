@@ -11,7 +11,7 @@ module Avram
           operation.{{ attribute[:name] }}.value =
             {{ attribute[:type] }}.adapter
               .parse!(value)
-              .as({{ attribute[:type] }})
+              .try &.as({{ attribute[:type] }})
 
           self
         end
