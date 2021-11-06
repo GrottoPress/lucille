@@ -9,7 +9,9 @@ module Avram
       {% for attribute in operation.resolve.constant(:COLUMN_ATTRIBUTES) %}
         def {{ attribute[:name] }}(value)
           operation.{{ attribute[:name] }}.value =
-            {{ attribute[:type] }}.adapter.parse!(value)
+            {{ attribute[:type] }}.adapter
+              .parse!(value)
+              .as({{ attribute[:type] }})
 
           self
         end
