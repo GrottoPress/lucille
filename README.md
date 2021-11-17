@@ -64,6 +64,24 @@
   - `.validate_url`
   - `.validate_username`
 
+- #### Models (Data)
+
+  - `Lucille::StatusColumns`
+
+- #### Models (Domain)
+
+  - `RecordStatus`
+
+- #### Operations
+
+  - `Lucille::Activate`
+  - `Lucille::Deactivate`
+  - `Lucille::ValidateStatus`
+
+- #### Queries
+
+  - `Lucille::StatusQuery`
+
 ### Carbon
 
 - #### Mixins

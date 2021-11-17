@@ -1,5 +1,6 @@
 class User < BaseModel
   include Carbon::Emailable
+  include Lucille::StatusColumns
 
   __enum Level do
     Admin
@@ -7,7 +8,7 @@ class User < BaseModel
   end
 
   skip_default_columns
-    
+
   primary_key id : Int64
 
   table :users do

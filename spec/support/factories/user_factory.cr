@@ -6,5 +6,6 @@ class UserFactory < Avram::Factory
   private def set_defaults
     email "user@domain.tld"
     level :author
+    active_at Time.utc
   end
 end
