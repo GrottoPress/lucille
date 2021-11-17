@@ -1,4 +1,4 @@
-require "../spec_helper"
+require "../../spec_helper"
 
 private class SpecCreateUser < User::SaveOperation
   permit_columns :email, :email, :active_at, :inactive_at
