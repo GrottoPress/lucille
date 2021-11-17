@@ -7,6 +7,12 @@ class User < BaseModel
     Author
   end
 
+  class Metadata
+    include Lucille::Metadata
+
+    property height : Int32?
+  end
+
   skip_default_columns
 
   primary_key id : Int64
@@ -14,6 +20,7 @@ class User < BaseModel
   table :users do
     column email : String
     column level : User::Level
+    column metadata : User::Metadata?, serialize: true
   end
 
   def emailable : Carbon::Address
