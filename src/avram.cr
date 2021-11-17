@@ -1,4 +1,7 @@
 require "pawn"
+
+require "./lucille/version"
+require "./lucille/**"
 require "./avram/**"
 
 module Avram
