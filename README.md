@@ -91,6 +91,10 @@
 
 ### Lucky
 
+- #### Actions
+
+  - `Lucille::ActionHelpers`
+
 - #### Annotations
 
   - `Memoize`: Invokes *Lucky*'s `.memoize` macro

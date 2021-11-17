@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Add support for *Crystal* v1.2
 - Add status columns (`active_at`, `inactive_at`)
 - Add `Lucille::JSON`
+- Add `Lucille::ActionHelpers`
 
 ### Changed
 - Rename `Avram::Validations.validate_primary_key` to `.validate_foreign_key`
