@@ -1,4 +1,4 @@
-module Lucille::Metadata
+module Lucille::JSON
   macro included
     include JSON::Serializable
     include JSON::Serializable::Unmapped

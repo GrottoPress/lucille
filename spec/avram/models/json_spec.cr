@@ -1,6 +1,6 @@
 require "../../spec_helper"
 
-describe Lucille::Metadata do
+describe Lucille::JSON do
   it "saves metadata" do
     height = 12
     width = 32

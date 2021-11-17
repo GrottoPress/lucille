@@ -66,7 +66,7 @@
 
 - #### Models (Data)
 
-  - `Lucille::Metadata`
+  - `Lucille::JSON`
   - `Lucille::StatusColumns`
 
 - #### Models (Domain)

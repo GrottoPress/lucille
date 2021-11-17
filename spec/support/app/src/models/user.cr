@@ -8,7 +8,7 @@ class User < BaseModel
   end
 
   class Metadata
-    include Lucille::Metadata
+    include Lucille::JSON
 
     property height : Int32?
   end
