@@ -34,6 +34,9 @@ describe Lucille::Activate do
         user.status.unactive?.should be_false
 
         user.status.active?(active_at).should be_true
+        user.status.inactive?(active_at).should be_false
+        user.status.pending?(active_at).should be_false
+        user.status.unactive?(active_at).should be_false
       end
     end
   end
