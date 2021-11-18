@@ -11,6 +11,7 @@ describe Lucille::Activate do
       user.try do |user|
         user.status.active?.should be_true
         user.status.inactive?.should be_false
+        user.status.pending?.should be_false
         user.status.unactive?.should be_false
       end
     end
@@ -28,9 +29,11 @@ describe Lucille::Activate do
 
       user.try do |user|
         user.status.active?.should be_false
-        user.status.active?(active_at).should be_true
         user.status.inactive?.should be_false
-        user.status.unactive?.should be_true
+        user.status.pending?.should be_true
+        user.status.unactive?.should be_false
+
+        user.status.active?(active_at).should be_true
       end
     end
   end
@@ -45,9 +48,11 @@ describe Lucille::Activate do
 
       user.try do |user|
         user.status.active?.should be_true
-        user.status.active?(3.days.ago).should be_false
         user.status.inactive?.should be_false
+        user.status.pending?.should be_false
         user.status.unactive?.should be_false
+
+        user.status.active?(3.days.ago).should be_false
       end
     end
   end
