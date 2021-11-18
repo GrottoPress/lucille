@@ -18,7 +18,8 @@ module Lucille::Deactivate
     # Don't update `inactive_at` if record is already inactive
     private def reset_inactive_at
       record.try do |record|
-        inactive_at.value = inactive_at.original_value if record.inactive?
+        return unless record.status.inactive?
+        inactive_at.value = inactive_at.original_value
       end
     end
   end

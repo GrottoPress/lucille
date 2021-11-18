@@ -6,7 +6,7 @@ describe Lucille::Deactivate do
 
     DeactivateUser.update(user) do |operation, updated_user|
       operation.saved?.should be_true
-      updated_user.inactive?.should be_true
+      updated_user.status.inactive?.should be_true
     end
   end
 
@@ -20,9 +20,9 @@ describe Lucille::Deactivate do
     ) do |operation, updated_user|
       operation.saved?.should be_true
 
-      updated_user.active?.should be_true
-      updated_user.inactive?.should be_false
-      RecordStatus.new(updated_user).inactive?(inactive_at).should be_true
+      updated_user.status.active?.should be_true
+      updated_user.status.inactive?.should be_false
+      updated_user.status.inactive?(inactive_at).should be_true
     end
   end
 
@@ -36,9 +36,9 @@ describe Lucille::Deactivate do
     ) do |operation, updated_user|
       operation.saved?.should be_true
 
-      updated_user.active?.should be_false
-      updated_user.inactive?.should be_true
-      RecordStatus.new(updated_user).inactive?(2.days.ago).should be_false
+      updated_user.status.active?.should be_false
+      updated_user.status.inactive?.should be_true
+      updated_user.status.inactive?(2.days.ago).should be_false
     end
   end
 end

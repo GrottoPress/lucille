@@ -9,9 +9,9 @@ describe Lucille::Activate do
       user.should be_a(User)
 
       user.try do |user|
-        user.active?.should be_true
-        user.inactive?.should be_false
-        user.unactive?.should be_false
+        user.status.active?.should be_true
+        user.status.inactive?.should be_false
+        user.status.unactive?.should be_false
       end
     end
   end
@@ -27,10 +27,10 @@ describe Lucille::Activate do
       user.should be_a(User)
 
       user.try do |user|
-        user.active?.should be_false
-        RecordStatus.new(user).active?(active_at).should be_true
-        user.inactive?.should be_false
-        user.unactive?.should be_true
+        user.status.active?.should be_false
+        user.status.active?(active_at).should be_true
+        user.status.inactive?.should be_false
+        user.status.unactive?.should be_true
       end
     end
   end
@@ -44,10 +44,10 @@ describe Lucille::Activate do
       user.should be_a(User)
 
       user.try do |user|
-        user.active?.should be_true
-        RecordStatus.new(user).active?(3.days.ago).should be_false
-        user.inactive?.should be_false
-        user.unactive?.should be_false
+        user.status.active?.should be_true
+        user.status.active?(3.days.ago).should be_false
+        user.status.inactive?.should be_false
+        user.status.unactive?.should be_false
       end
     end
   end
