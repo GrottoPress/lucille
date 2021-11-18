@@ -6,39 +6,21 @@ describe Lucille::Deactivate do
 
     DeactivateUser.update(user) do |operation, updated_user|
       operation.saved?.should be_true
-      updated_user.status.inactive?.should be_true
-    end
-  end
-
-  it "deactivates user in the future" do
-    inactive_at = 1.day.from_now.to_utc.at_beginning_of_second
-    user = UserFactory.create
-
-    DeactivateUser.update(
-      user,
-      params(inactive_at: inactive_at)
-    ) do |operation, updated_user|
-      operation.saved?.should be_true
-
-      updated_user.status.active?.should be_true
-      updated_user.status.inactive?.should be_false
-      updated_user.status.inactive?(inactive_at).should be_true
-    end
-  end
-
-  it "deactivates user in the past" do
-    inactive_at = 1.day.ago.to_utc.at_beginning_of_second
-    user = UserFactory.create &.active_at(3.days.ago.to_utc)
-
-    DeactivateUser.update(
-      user,
-      params(inactive_at: inactive_at)
-    ) do |operation, updated_user|
-      operation.saved?.should be_true
 
       updated_user.status.active?.should be_false
       updated_user.status.inactive?.should be_true
-      updated_user.status.inactive?(2.days.ago).should be_false
+    end
+  end
+
+  it "deactivates pending user" do
+    active_at = 1.day.from_now.to_utc.at_beginning_of_second
+    user = UserFactory.create &.active_at(active_at)
+
+    DeactivateUser.update(user) do |operation, updated_user|
+      operation.saved?.should be_true
+
+      updated_user.status.pending?.should be_false
+      updated_user.status.unactive?.should be_true
     end
   end
 end
