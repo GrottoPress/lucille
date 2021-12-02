@@ -7,7 +7,7 @@ module Lucille::ValidateStatus
 
     private def validate_active_at_required
       validate_required active_at,
-        message: Rex.t("lucille.validate_status.active_at_required")
+        message: Rex.t(:"lucille.validate_status.active_at_required")
     end
 
     private def validate_inactive_at_gte_active_at
@@ -16,7 +16,7 @@ module Lucille::ValidateStatus
           return unless inactive < active
 
           inactive_at.add_error Rex.t(
-            "lucille.validate_status.inactive_at_gte_active_at",
+            :"lucille.validate_status.inactive_at_gte_active_at",
             active,
             inactive
           )
