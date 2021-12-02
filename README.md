@@ -112,6 +112,10 @@
 
   - `DevDeliverLaterStrategy`: Delivers mail immediately, in the current fiber.
 
+## I18n
+
+*Lucille* uses *Rex* for i18n. See <https://github.com/GrottoPress/rex>
+
 ## Development
 
 Create a `.env.sh` file:
