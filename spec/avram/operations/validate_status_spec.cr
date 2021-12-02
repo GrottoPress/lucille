@@ -14,7 +14,7 @@ describe Lucille::ValidateStatus do
     )) do |operation, user|
       user.should be_nil
 
-      assert_invalid(operation.active_at, " required")
+      assert_invalid(operation.active_at, "active_at_required")
     end
   end
 
@@ -27,7 +27,7 @@ describe Lucille::ValidateStatus do
     )) do |operation, user|
       user.should be_nil
 
-      assert_invalid(operation.inactive_at, "earlier than")
+      assert_invalid(operation.inactive_at, "inactive_at_gte_active_at")
     end
   end
 end
