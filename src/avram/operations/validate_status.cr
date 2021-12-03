@@ -17,8 +17,8 @@ module Lucille::ValidateStatus
 
           inactive_at.add_error Rex.t(
             :"lucille.validate_status.inactive_at_gte_active_at",
-            active,
-            inactive
+            Rex.l(active),
+            Rex.l(inactive)
           )
         end
       end
