@@ -62,6 +62,7 @@
   - `.validate_positive_number`
   - `.validate_slug`
   - `.validate_url`
+  - `.validate_unicode_name`
   - `.validate_username`
 
 - #### Models (Data)

@@ -166,6 +166,99 @@ describe Avram::Validations do
 
       name.valid?.should be_false
     end
+
+    it "rejects valid unicode names" do
+      name = Avram::Attribute(String).new(
+        :name,
+        param: nil,
+        value: "東海林賢蔵",
+        param_key: "user"
+      )
+
+      Avram::Validations.validate_name name
+
+      name.valid?.should be_false
+    end
+  end
+
+  describe "#validate_unicode_name" do
+    it "accepts valid unicode name" do
+      name = Avram::Attribute(String).new(
+        :name,
+        param: nil,
+        value: "東海林賢蔵",
+        param_key: "user"
+      )
+
+      Avram::Validations.validate_unicode_name name
+
+      name.valid?.should be_true
+    end
+
+    it "accepts valid ascii name" do
+      name = Avram::Attribute(String).new(
+        :name,
+        param: nil,
+        value: "Jomo Kenyata",
+        param_key: "user"
+      )
+
+      Avram::Validations.validate_unicode_name name
+
+      name.valid?.should be_true
+    end
+
+    it "rejects number in name" do
+      name = Avram::Attribute(String).new(
+        :name,
+        param: nil,
+        value: "mary42",
+        param_key: "user"
+      )
+
+      Avram::Validations.validate_unicode_name name
+
+      name.valid?.should be_false
+    end
+
+    it "rejects leading hyphen in name" do
+      name = Avram::Attribute(String).new(
+        :name,
+        param: nil,
+        value: "-mary",
+        param_key: "user"
+      )
+
+      Avram::Validations.validate_unicode_name name
+
+      name.valid?.should be_false
+    end
+
+    it "rejects leading space in name" do
+      name = Avram::Attribute(String).new(
+        :name,
+        param: nil,
+        value: " mary",
+        param_key: "user"
+      )
+
+      Avram::Validations.validate_unicode_name name
+
+      name.valid?.should be_false
+    end
+
+    it "rejects special chars in name" do
+      name = Avram::Attribute(String).new(
+        :name,
+        param: nil,
+        value: "mary!jay",
+        param_key: "user"
+      )
+
+      Avram::Validations.validate_unicode_name name
+
+      name.valid?.should be_false
+    end
   end
 
   describe "#validate_username" do

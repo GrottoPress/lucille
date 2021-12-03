@@ -95,6 +95,19 @@ module Avram
       end
     end
 
+    def validate_unicode_name(
+      *attributes,
+      message : Attribute::ErrorMessage = "is invalid"
+    )
+      attributes.each do |attribute|
+        attribute.value.try do |value|
+          next if value.matches?(/^\p{L}[\p{L}\-\'\s]*$/i)
+
+          attribute.add_error(message)
+        end
+      end
+    end
+
     def validate_username(
       *attributes,
       message : Attribute::ErrorMessage = "is invalid"
