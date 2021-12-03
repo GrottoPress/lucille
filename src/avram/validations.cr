@@ -88,7 +88,7 @@ module Avram
     )
       attributes.each do |attribute|
         attribute.value.try do |value|
-          next if value.matches?(/^[a-z][a-z\-\s]*$/i)
+          next if value.matches?(/^[a-z][a-z\-\'\s]*$/i)
 
           attribute.add_error(message)
         end

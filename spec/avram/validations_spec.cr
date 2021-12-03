@@ -106,7 +106,7 @@ describe Avram::Validations do
       name = Avram::Attribute(String).new(
         :name,
         param: nil,
-        value: "john smith-jnr",
+        value: "john O'brien smith-jnr",
         param_key: "user"
       )
 
