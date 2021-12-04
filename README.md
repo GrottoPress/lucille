@@ -100,6 +100,10 @@
 
   - `Memoize`: Invokes *Lucky*'s `.memoize` macro
 
+- #### Serializers
+
+  - `Lucille::Serializer`: It's a `module`, so you can create serializer with `struct`s.
+
 ### Spec
 
 - #### Avram

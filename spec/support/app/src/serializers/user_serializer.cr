@@ -1,8 +1,8 @@
-class UserSerializer < BaseSerializer
+struct UserSerializer < BaseSerializer
   def initialize(@user : User)
   end
 
   def render
-    {type: "UserSerializer"}
+    {id: @user.id}
   end
 end
