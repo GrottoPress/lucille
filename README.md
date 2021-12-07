@@ -119,7 +119,17 @@
 
 ## I18n
 
-*Lucille* uses *Rex* for i18n. See <https://github.com/GrottoPress/rex>
+*Lucille* uses *Rex* for i18n. See <https://github.com/GrottoPress/rex>.
+
+Use the following as a guide to set up translations:
+
+```yaml
+en:
+  operation:
+    error:
+      active_at_required: Active time is required
+      inactive_at_earlier: Inactive time cannot be earlier than active time
+```
 
 ## Development
 
