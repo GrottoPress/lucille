@@ -7,10 +7,10 @@ class User < BaseModel
     Author
   end
 
-  class Metadata
+  struct Metadata
     include Lucille::JSON
 
-    property height : Int32?
+    getter height : Int32?
   end
 
   skip_default_columns

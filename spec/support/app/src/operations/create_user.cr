@@ -11,12 +11,11 @@ class CreateUser < User::SaveOperation
 
   private def set_height
     height.value.try do |value|
-      if metadata.value
-        metadata.value.try &.height = value
-        metadata.value = metadata.value.dup # Ensures `changed?` is `true`
-      else
-        metadata.value = User::Metadata.from_json({height: value}.to_json)
+      metadata.value.try do |_metadata|
+        return metadata.value = _metadata.merge(height: value)
       end
+
+      metadata.value = User::Metadata.from_json({height: value}.to_json)
     end
   end
 end
