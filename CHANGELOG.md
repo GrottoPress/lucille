@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased] - 
 
-## Added
+### Added
 - Add support for *Lucky* v0.29
 - Set up i18n with [*Rex*](https://github.com/GrottoPress/rex)
 - Add `Lucille::Serializer` module
