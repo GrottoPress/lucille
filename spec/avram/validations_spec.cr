@@ -513,13 +513,13 @@ describe Avram::Validations do
         Avram::Attribute(String).new(
           :label,
           param: nil,
-          value: "roses-are.red",
+          value: "roses-are-red",
           param_key: "app"
         ),
         Avram::Attribute(String).new(
           :label,
           param: nil,
-          value: "abc.def--ghi.jkl.5mno",
+          value: "violets--are-blue",
           param_key: "app"
         )
       }
@@ -565,7 +565,7 @@ describe Avram::Validations do
         Avram::Attribute(String).new(
           :label,
           param: nil,
-          value: "sub..domain",
+          value: "sub.domain",
           param_key: "app"
         )
       }

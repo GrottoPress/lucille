@@ -13,6 +13,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Add `Lucille::Serializer` module
 - Add `Lucille::JSON#merge` methods
 
+### Fixed
+- Fix wrong regular expression for domain labels
+
 ### Removed
 - Drop support for *Lucky* v0.28
 
