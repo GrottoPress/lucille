@@ -1,1 +1,2 @@
+require "./lucille"
 require "./spec/**"

@@ -1,1 +1,2 @@
+require "../lucky"
 require "./lucky/**"
