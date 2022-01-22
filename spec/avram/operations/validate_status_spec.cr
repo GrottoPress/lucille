@@ -15,7 +15,7 @@ describe Lucille::ValidateStatus do
       user.should be_nil
 
       operation.active_at
-        .should_not(be_valid "operation.error.active_at_required")
+        .should have_error("operation.error.active_at_required")
     end
   end
 
@@ -29,7 +29,7 @@ describe Lucille::ValidateStatus do
       user.should be_nil
 
       operation.inactive_at
-        .should_not(be_valid "operation.error.inactive_at_earlier")
+        .should have_error("operation.error.inactive_at_earlier")
     end
   end
 end

@@ -108,7 +108,7 @@
 
 - #### Avram
 
-  - `#be_valid`: Spec expectation that asserts the validity of an attribute
+  - `#have_error`: Spec expectation that asserts the validity of an attribute
   - `#nested_params`: Creates nested params
   - `#params`: Creates params
 

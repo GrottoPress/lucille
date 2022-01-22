@@ -1,50 +1,65 @@
-def be_valid(message : String? = nil)
-  Lucille::BeValidExpectation.new(message)
+def have_error(message : String? = nil)
+  Lucille::HaveErrorExpectation.new(message)
 end
 
-def be_valid(key : Symbol, message : String? = nil)
-  Lucille::BeValidExpectation.new(message, key)
+def have_error(key : Symbol, message : String? = nil)
+  Lucille::HaveErrorExpectation.new(message, key)
 end
 
-struct Lucille::BeValidExpectation
+struct Lucille::HaveErrorExpectation
   def initialize(@message : String? = nil, @key : Symbol? = nil)
   end
 
   def match(attribute : Avram::Attribute) : Bool
-    return attribute.errors.empty? unless @message
-    attribute.errors.none?(&.includes? @message.not_nil!)
+    return !attribute.errors.empty? unless @message
+    attribute.errors.any?(&.includes? @message.not_nil!)
   end
 
   def match(operation : Avram::Callbacks)
-    return operation.errors[@key.not_nil!]?.nil? unless @message
-    !operation.errors[@key.not_nil!]?.try &.any? &.includes?(@message.not_nil!)
+    errors = operation.errors[@key.not_nil!]?
+    return !errors.nil? unless @message
+    !errors.try &.any? &.includes?(@message.not_nil!)
   end
 
   def failure_message(attribute : Avram::Attribute) : String
-    message = "Expected :#{attribute.name} to be valid, got errors:"
-
-    attribute.errors.each do |error|
-      message += "\n  - #{error}"
+    if @message
+      "Expected :#{attribute.name} to have the error '#{@message}'"
+    else
+      "Expected :#{attribute.name} to have an error"
     end
-
-    message
   end
 
   def failure_message(operation : Avram::Callbacks) : String
-    message = "Expected :#{@key.not_nil!} to be valid, got errors:"
-
-    operation.errors[@key.not_nil!].each do |error|
-      message += "\n  - #{error}"
+    if @message
+      "Expected :#{@key.not_nil!} to have the error '#{@message}'"
+    else
+      "Expected :#{@key.not_nil!} to have an error"
     end
-
-    message
   end
 
   def negative_failure_message(attribute : Avram::Attribute) : String
-    "Expected :#{attribute.name} to be invalid"
+    @message.try do |message|
+      return "Expected :#{attribute.name} to not have the error '#{message}'"
+    end
+
+    <<-MSG
+    Expected :#{attribute.name} to not have an error, got errors:
+    #{list attribute.errors}
+    MSG
   end
 
   def negative_failure_message(operation : Avram::Callbacks) : String
-    "Expected :#{@key.not_nil!} to be invalid"
+    @message.try do |message|
+      "Expected :#{@key.not_nil!} to not have the error '#{message}'"
+    end
+
+    <<-MSG
+    Expected :#{@key.not_nil!} to not have an error, got errors:
+    #{list operation.errors[@key.not_nil!]}
+    MSG
+  end
+
+  private def list(errors)
+    errors.map { |error| "  - #{error}" }.join("\n")
   end
 end

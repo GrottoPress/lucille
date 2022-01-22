@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 - Ensure support for *Crystal* v1.3
-- Add `#be_valid` spec expectation that asserts the validity of an attribute
+- Add `#have_error` spec expectation that asserts the validity of an attribute
 
 ### Removed
 - Remove `#assert_valid` and `#assert_invalid` spec helpers
