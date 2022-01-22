@@ -16,35 +16,3 @@ end
 def nested_params(**named_args)
   FakeNestedParams.new(**named_args)
 end
-
-def assert_valid(attribute : Avram::Attribute)
-  attribute.errors.should be_empty
-end
-
-def assert_valid(attribute : Avram::Attribute, text : String)
-  attribute.errors.select(&.includes? text).should be_empty
-end
-
-def assert_valid(operation : Avram::Callbacks, key : Symbol)
-  operation.errors[key]?.should be_nil
-end
-
-def assert_valid(operation : Avram::Callbacks, key : Symbol, text : String)
-  operation.errors[key]?.try &.select(&.includes? text).should(be_empty)
-end
-
-def assert_invalid(attribute : Avram::Attribute)
-  attribute.errors.should_not be_empty
-end
-
-def assert_invalid(attribute : Avram::Attribute, text : String)
-  attribute.errors.select(&.includes? text).size.should eq(1)
-end
-
-def assert_invalid(operation : Avram::Callbacks, key : Symbol)
-  operation.errors[key]?.should_not be_nil
-end
-
-def assert_invalid(operation : Avram::Callbacks, key : Symbol, text : String)
-  operation.errors[key]?.try(&.select(&.includes? text).size).should eq(1)
-end

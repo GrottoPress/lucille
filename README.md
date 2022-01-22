@@ -108,8 +108,7 @@
 
 - #### Avram
 
-  - `#assert_invalid`: Asserts that a given attribute is invalid
-  - `#assert_valid`: Asserts that a given attribute is valid
+  - `#be_valid`: Spec expectation that asserts the validity of an attribute
   - `#nested_params`: Creates nested params
   - `#params`: Creates params
 
