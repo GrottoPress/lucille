@@ -17,8 +17,8 @@ struct Lucille::HaveErrorExpectation
 
   def match(operation : Avram::Callbacks)
     errors = operation.errors[@key.not_nil!]?
-    return !errors.nil? unless @message
-    !errors.try &.any? &.includes?(@message.not_nil!)
+    return !!errors.try(&.empty?.!) unless @message
+    !!errors.try(&.any? &.includes? @message.not_nil!)
   end
 
   def failure_message(attribute : Avram::Attribute) : String
@@ -50,7 +50,7 @@ struct Lucille::HaveErrorExpectation
 
   def negative_failure_message(operation : Avram::Callbacks) : String
     @message.try do |message|
-      "Expected :#{@key.not_nil!} to not have the error '#{message}'"
+      return "Expected :#{@key.not_nil!} to not have the error '#{message}'"
     end
 
     <<-MSG
