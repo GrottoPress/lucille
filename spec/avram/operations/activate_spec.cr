@@ -8,7 +8,7 @@ describe Lucille::Activate do
     )) do |_, user|
       user.should be_a(User)
 
-      user.try do |user|
+      user.try do |user| # ameba:disable Lint/ShadowingOuterLocalVar
         user.status.active?.should be_true
         user.status.inactive?.should be_false
         user.status.pending?.should be_false
@@ -27,7 +27,7 @@ describe Lucille::Activate do
     )) do |_, user|
       user.should be_a(User)
 
-      user.try do |user|
+      user.try do |user| # ameba:disable Lint/ShadowingOuterLocalVar
         user.status.active?.should be_false
         user.status.inactive?.should be_false
         user.status.pending?.should be_true
@@ -49,7 +49,7 @@ describe Lucille::Activate do
     )) do |_, user|
       user.should be_a(User)
 
-      user.try do |user|
+      user.try do |user| # ameba:disable Lint/ShadowingOuterLocalVar
         user.status.active?.should be_true
         user.status.inactive?.should be_false
         user.status.pending?.should be_false
@@ -70,7 +70,7 @@ describe Lucille::Activate do
     )) do |_, user|
       user.should be_a(User)
 
-      user.try do |user|
+      user.try do |user| # ameba:disable Lint/ShadowingOuterLocalVar
         user.inactive_at.should eq(inactive_at)
       end
     end

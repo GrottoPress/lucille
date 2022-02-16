@@ -8,7 +8,7 @@ describe Lucille::JSON do
     CreateUser.create(
       params(email: "me@example.net", level: :admin, height: height),
       metadata: User::Metadata.from_json({width: width}.to_json)
-    ) do |operation, user|
+    ) do |_, user|
       user.should be_a(User)
 
       user.try &.metadata.try do |metadata|

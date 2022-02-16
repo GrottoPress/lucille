@@ -244,6 +244,7 @@ module Avram
       message : Attribute::ErrorMessage = "does not exist"
     )
       attribute.value.try do |value|
+        # ameba:disable Performance/AnyInsteadOfEmpty
         unless query.where(query.primary_key_name, value).any?
           attribute.add_error(message)
         end

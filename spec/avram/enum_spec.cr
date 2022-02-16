@@ -34,6 +34,7 @@ describe ".__enum" do
 
     it "works with queries" do
       UserFactory.create &.level(:admin)
+      # ameba:disable Performance/AnyInsteadOfEmpty
       UserQuery.new.level(:admin).any?.should be_true
     end
   end

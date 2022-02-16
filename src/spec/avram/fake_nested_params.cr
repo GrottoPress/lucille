@@ -10,7 +10,7 @@ struct FakeNestedParams
     params.to_h.each do |key, value|
       hash[key.to_s] = value.to_h
         .transform_keys(&.to_s)
-        .transform_values { |value| to_param_string(value) }
+        .transform_values { |_value| to_param_string(_value) }
     end
 
     new(hash)

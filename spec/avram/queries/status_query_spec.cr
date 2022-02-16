@@ -2,7 +2,7 @@ require "../../spec_helper"
 
 describe Lucille::StatusQuery do
   it "retrieves active user" do
-    user = UserFactory.create
+    UserFactory.create
 
     UserQuery.new.is_active.first?.should be_a(User)
     UserQuery.new.is_inactive.first?.should be_nil
@@ -25,7 +25,7 @@ describe Lucille::StatusQuery do
 
   it "retrieves future active user" do
     active_at = 2.days.from_now.to_utc.at_beginning_of_second
-    user = UserFactory.create &.active_at(active_at)
+    UserFactory.create &.active_at(active_at)
 
     UserQuery.new.is_active.first?.should be_nil
     UserQuery.new.is_inactive.first?.should be_nil
@@ -58,7 +58,7 @@ describe Lucille::StatusQuery do
 
   it "retrieves future inactive user" do
     active_at = 2.days.from_now.to_utc.at_beginning_of_second
-    user = UserFactory.create &.active_at(active_at).inactive_at(active_at)
+    UserFactory.create &.active_at(active_at).inactive_at(active_at)
 
     UserQuery.new.is_active.first?.should be_nil
     UserQuery.new.is_inactive.first?.should be_nil
