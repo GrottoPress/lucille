@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 - Ensure support for *Crystal* v1.3
 - Add `#have_error` spec expectation that asserts the validity of an attribute
+- Add methods to retrieve record status as string
 
 ### Removed
 - Remove `#assert_valid` and `#assert_invalid` spec helpers
