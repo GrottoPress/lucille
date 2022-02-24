@@ -2,6 +2,23 @@ struct RecordStatus
   def initialize(@record : Lucille::StatusColumns)
   end
 
+  def to_s(io)
+    io << at(Time.utc)
+  end
+
+  def at(time : Time) : String
+    case
+    when active?(time)
+      "Active"
+    when inactive?(time)
+      "Inactive"
+    when pending?(time)
+      "Pending"
+    else
+      "Unactive"
+    end
+  end
+
   def active?(at time : Time = Time.utc) : Bool
     return false if @record.active_at > time
     @record.inactive_at.nil? || @record.inactive_at.not_nil! > time
