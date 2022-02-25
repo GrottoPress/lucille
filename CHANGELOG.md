@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Removed
 - Remove `#assert_valid` and `#assert_invalid` spec helpers
+- Remove `Lucille::Serializer.for_collection` method
 
 ## [0.3.0] - 2022-01-03
 
