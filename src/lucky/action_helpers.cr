@@ -32,7 +32,7 @@ module Lucille::ActionHelpers
     end
 
     def array_param(param_key, param) : Array(String)
-      if request.headers["Content-Type"]?.try &.includes?("/json")
+      if request.headers["Content-Type"]?.try &.downcase.includes?("/json")
         params.from_json[param_key.to_s][param.to_s].as_a.map(&.to_s)
       else
         params.get_all("#{param_key}:#{param}")
