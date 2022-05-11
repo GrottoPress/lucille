@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 - Add support for *Lucky* v0.30
+- Add `String::Lucky::Criteria#search`
 
 ## [0.4.0] - 2022-03-17
 

@@ -84,6 +84,10 @@
 
   - `Lucille::StatusQuery`
 
+- #### Criteria
+
+  - `String::Lucky::Criteria#search`
+
 ### Carbon
 
 - #### Mixins
