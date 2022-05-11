@@ -1,4 +1,4 @@
-require "../../spec_helper"
+require "../spec_helper"
 
 describe String::Lucky::Criteria do
   it "searches for single keyword" do
