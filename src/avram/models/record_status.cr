@@ -6,16 +6,16 @@ struct RecordStatus
     io << at(Time.utc)
   end
 
-  def at(time : Time) : String
+  def at(time : Time) : Symbol
     case
     when active?(time)
-      "Active"
+      :active
     when inactive?(time)
-      "Inactive"
+      :inactive
     when pending?(time)
-      "Pending"
+      :pending
     else
-      "Unactive"
+      :unactive
     end
   end
 
