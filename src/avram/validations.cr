@@ -20,8 +20,8 @@ class String
 
   def http_url? : Bool
     return false if empty? || !url?
-    uri = URI.parse(self)
-    uri.scheme.nil? || uri.scheme.to_s.matches?(/^https?$/i)
+    scheme = URI.parse(self).scheme
+    scheme.nil? || scheme.downcase.in?({"http", "https"})
   end
 
   def url? : Bool
