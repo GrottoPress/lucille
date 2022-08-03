@@ -1,3 +1,3 @@
 class PasswordResetQuery < PasswordReset::BaseQuery
-  include Lucille::SuccessQuery
+  include Lucille::SuccessStatusQuery
 end

@@ -1,4 +1,4 @@
-module Lucille::SuccessQuery
+module Lucille::SuccessStatusQuery
   macro included
     def is_success(at time : Time = Time.utc)
       success(true)

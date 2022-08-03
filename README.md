@@ -85,7 +85,7 @@
 - #### Queries
 
   - `Lucille::StatusQuery`
-  - `Lucille::SuccessQuery`
+  - `Lucille::SuccessStatusQuery`
 
 - #### Criteria
 

@@ -1,6 +1,6 @@
 require "../../spec_helper"
 
-describe Lucille::SuccessQuery do
+describe Lucille::SuccessStatusQuery do
   it "retrieves records with success status" do
     PasswordResetFactory.create &.success(true)
 
