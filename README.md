@@ -69,10 +69,12 @@
 
   - `Lucille::JSON`
   - `Lucille::StatusColumns`
+  - `Lucille::SuccessColumn`
 
 - #### Models (Domain)
 
   - `RecordStatus`
+  - `SuccessStatus`
 
 - #### Operations
 
@@ -83,6 +85,7 @@
 - #### Queries
 
   - `Lucille::StatusQuery`
+  - `Lucille::SuccessQuery`
 
 - #### Criteria
 

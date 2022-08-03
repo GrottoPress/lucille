@@ -1,14 +1,14 @@
+require "./status"
+
 struct RecordStatus
+  include Lucille::Status
+
   @active_time : Time
   @inactive_time : Time?
 
   def initialize(record : Lucille::StatusColumns)
     @active_time = record.active_at
     @inactive_time = record.inactive_at
-  end
-
-  def to_s(io)
-    io << at(Time.utc)
   end
 
   def at(time : Time) : Symbol
