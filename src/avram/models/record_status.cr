@@ -1,5 +1,10 @@
 struct RecordStatus
-  def initialize(@record : Lucille::StatusColumns)
+  @active_time : Time
+  @inactive_time : Time?
+
+  def initialize(record : Lucille::StatusColumns)
+    @active_time = record.active_at
+    @inactive_time = record.inactive_at
   end
 
   def to_s(io)
@@ -20,22 +25,22 @@ struct RecordStatus
   end
 
   def active?(at time : Time = Time.utc) : Bool
-    return false if @record.active_at > time
-    @record.inactive_at.nil? || @record.inactive_at.not_nil! > time
+    return false if @active_time > time
+    @inactive_time.nil? || @inactive_time.not_nil! > time
   end
 
   def inactive?(at time : Time = Time.utc) : Bool
-    @record.active_at <= time && !active?(time)
+    @active_time <= time && !active?(time)
   end
 
     # Active in the future (from the perspective of `time`)
   def pending?(at time : Time = Time.utc) : Bool
-    return false if @record.inactive_at.try(&.<= @record.active_at)
-    @record.active_at > time
+    return false if @inactive_time.try(&.<= @active_time)
+    @active_time > time
   end
 
   # Pending, but deactivated (`inactive_at` equals `active_at`).
   def unactive?(at time : Time = Time.utc) : Bool
-    @record.active_at > time && !pending?(time)
+    @active_time > time && !pending?(time)
   end
 end
