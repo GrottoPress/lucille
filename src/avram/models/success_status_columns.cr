@@ -1,4 +1,4 @@
-module Lucille::SuccessColumn
+module Lucille::SuccessStatusColumns
   macro included
     include Lucille::StatusColumns
 

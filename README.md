@@ -69,7 +69,7 @@
 
   - `Lucille::JSON`
   - `Lucille::StatusColumns`
-  - `Lucille::SuccessColumn`
+  - `Lucille::SuccessStatusColumns`
 
 - #### Models (Domain)
 

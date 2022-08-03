@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased] - 
 
 ### Added
-- Add `Lucille::SuccessColumn` model mixin
+- Add `Lucille::SuccessStatusColumns` model mixin
 - Add `Lucille::SuccessQuery` query mixin
 - Add `Lucille::SuccessStatus` domain model
 

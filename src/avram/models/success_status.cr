@@ -1,7 +1,7 @@
 struct SuccessStatus
   include Lucille::Status
 
-  def initialize(@record : Lucille::SuccessColumn)
+  def initialize(@record : Lucille::SuccessStatusColumns)
     @status = RecordStatus.new(@record)
   end
 

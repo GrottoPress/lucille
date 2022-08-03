@@ -1,5 +1,5 @@
 class PasswordReset < BaseModel
-  include Lucille::SuccessColumn
+  include Lucille::SuccessStatusColumns
 
   skip_default_columns
 
