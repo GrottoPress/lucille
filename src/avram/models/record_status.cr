@@ -28,6 +28,7 @@ struct RecordStatus
     @record.active_at <= time && !active?(time)
   end
 
+    # Active in the future (from the perspective of `time`)
   def pending?(at time : Time = Time.utc) : Bool
     return false if @record.inactive_at.try(&.<= @record.active_at)
     @record.active_at > time
