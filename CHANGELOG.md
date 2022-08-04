@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Add `Lucille::SuccessStatusColumns` model mixin
 - Add `Lucille::SuccessStatusQuery` query mixin
 - Add `Lucille::SuccessStatus` domain model
+- Add `Lucille::SetUserIdFromUser` operation mixin
 
 ### Changed
 - Change `RecordStatus#at` return type from `String` to `Symbol`

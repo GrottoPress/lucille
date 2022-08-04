@@ -80,6 +80,7 @@
 
   - `Lucille::Activate`
   - `Lucille::Deactivate`
+  - `Lucille::SetUserIdFromUser`
   - `Lucille::ValidateStatus`
 
 - #### Queries

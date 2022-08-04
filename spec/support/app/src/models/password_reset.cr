@@ -5,5 +5,7 @@ class PasswordReset < BaseModel
 
   primary_key id : Int64
 
-  table :password_resets {}
+  table :password_resets do
+    belongs_to user : User?
+  end
 end
