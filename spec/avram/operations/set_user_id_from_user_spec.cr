@@ -13,7 +13,7 @@ describe Lucille::SetUserIdFromUser do
     SavePasswordReset.create(
       params(active_at: Time.utc, success: false),
       user: user
-    ) do |operation, password_reset|
+    ) do |_, password_reset|
       password_reset.should be_a(PasswordReset)
 
       password_reset.try do |_password_reset|
