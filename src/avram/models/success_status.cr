@@ -37,7 +37,7 @@ struct SuccessStatus
     !success?(time) && @status.pending?(time)
   end
 
-  # Pending, but deactivated (`inactive_at` equals `active_at`).
+  # Pending, but deactivated (inactive time equals active time)
   def unactive?(at time : Time = Time.utc) : Bool
     !success?(time) && @status.unactive?(time)
   end

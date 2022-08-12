@@ -39,7 +39,7 @@ struct RecordStatus
     @active_time > time
   end
 
-  # Pending, but deactivated (`inactive_at` equals `active_at`).
+  # Pending, but deactivated (inactive time equals active time)
   def unactive?(at time : Time = Time.utc) : Bool
     @active_time > time && !pending?(time)
   end
