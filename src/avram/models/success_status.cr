@@ -41,4 +41,8 @@ struct SuccessStatus
   def unactive?(at time : Time = Time.utc) : Bool
     !success?(time) && @status.unactive?(time)
   end
+
+  def span? : Time::Span?
+    @status.span?
+  end
 end
