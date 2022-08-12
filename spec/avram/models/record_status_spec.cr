@@ -25,4 +25,13 @@ describe RecordStatus do
     status = RecordStatus.new(user)
     status.to_s.should eq("unactive")
   end
+
+  it "returns duration" do
+    start_at = 1.day.ago
+    end_at = start_at + 1.day
+
+    user = UserFactory.create &.active_at(start_at).inactive_at(end_at)
+
+    RecordStatus.new(user).span?.should eq(1.day)
+  end
 end

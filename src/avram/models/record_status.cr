@@ -43,4 +43,8 @@ struct RecordStatus
   def unactive?(at time : Time = Time.utc) : Bool
     @active_time > time && !pending?(time)
   end
+
+  def span? : Time::Span?
+    @inactive_time.try { |inactive_time| inactive_time - @active_time }
+  end
 end

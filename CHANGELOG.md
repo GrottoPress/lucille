@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Add `Lucille::SuccessStatusQuery` query mixin
 - Add `SuccessStatus` domain model
 - Add `Lucille::SetUserIdFromUser` operation mixin
+- Add `RecordStatus#span?` to return the duration a record spans
 
 ### Changed
 - Change `RecordStatus#at` return type from `String` to `Symbol`
