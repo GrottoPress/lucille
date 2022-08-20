@@ -6,8 +6,8 @@ module Lucille::SetUserIdFromUser
       set_user_id
     end
 
-    def user : User?
-      @user ||= user_id.value.try do |value|
+    def user! : User?
+      self.user ||= user_id.value.try do |value|
         UserQuery.new.id(value).first?
       end
     end
