@@ -3,6 +3,8 @@ require "../../spec_helper"
 describe SuccessStatus do
   it "returns success status" do
     password_reset = PasswordResetFactory.create &.success(true)
+      .inactive_at(Time.utc)
+
     password_reset.status.to_s.should eq("success")
     password_reset.status.inactive?.should be_true
   end
@@ -22,7 +24,7 @@ describe SuccessStatus do
   end
 
   it "returns pending status" do
-    password_reset = PasswordResetFactory.create &.success(false)
+    password_reset = PasswordResetFactory.create &.success(true)
       .active_at(1.day.from_now)
 
     password_reset.status.to_s.should eq("pending")
@@ -33,6 +35,7 @@ describe SuccessStatus do
 
     password_reset = PasswordResetFactory.create &.active_at(time)
       .inactive_at(time)
+      .success(true)
 
     password_reset.status.to_s.should eq("unactive")
   end

@@ -2,7 +2,7 @@ require "../../spec_helper"
 
 describe Lucille::SuccessStatusQuery do
   it "retrieves records with success status" do
-    PasswordResetFactory.create &.success(true)
+    PasswordResetFactory.create &.success(true).inactive_at(Time.utc)
 
     # ameba:disable Performance/AnyInsteadOfEmpty
     PasswordResetQuery.new.is_success.any?.should be_true

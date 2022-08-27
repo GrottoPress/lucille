@@ -2,7 +2,8 @@ struct SuccessStatus
   include Lucille::Status
 
   def initialize(@record : Lucille::SuccessStatusColumns)
-    @status = RecordStatus.new(@record)
+    @active_time = record.active_at
+    @inactive_time = record.inactive_at
   end
 
   def at(time : Time) : Symbol
@@ -12,37 +13,15 @@ struct SuccessStatus
     when failure?(time)
       :failure
     else
-      @status.at(time)
+      previous_def(time)
     end
   end
 
   def success?(at time : Time = Time.utc) : Bool
-    @record.success?
+    @record.success? && inactive?(time)
   end
 
   def failure?(at time : Time = Time.utc) : Bool
-    !success?(time) && @status.inactive?(time)
-  end
-
-  def active?(at time : Time = Time.utc) : Bool
-    !success?(time) && @status.active?(time)
-  end
-
-  def inactive?(at time : Time = Time.utc) : Bool
-    success?(time) || failure?(time)
-  end
-
-  # Active in the future (from the perspective of `time`)
-  def pending?(at time : Time = Time.utc) : Bool
-    !success?(time) && @status.pending?(time)
-  end
-
-  # Pending, but deactivated (inactive time equals active time)
-  def unactive?(at time : Time = Time.utc) : Bool
-    !success?(time) && @status.unactive?(time)
-  end
-
-  def span? : Time::Span?
-    @status.span?
+    !@record.success? && inactive?(time)
   end
 end
