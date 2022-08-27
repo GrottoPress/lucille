@@ -7,7 +7,7 @@ struct SuccessStatus
 
   def at(time : Time) : Symbol
     case
-    when success?
+    when success?(time)
       :success
     when failure?(time)
       :failure
