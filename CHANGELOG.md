@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Changed
 - Change `RecordStatus#at` return type from `String` to `Symbol`
+- Allow setting custom inactive time in `Lucille::Deactivate`
 
 ## [0.5.0] - 2022-06-28
 

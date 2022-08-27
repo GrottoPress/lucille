@@ -7,7 +7,9 @@ module Lucille::Deactivate
     private def set_inactive_at
       record.try do |record|
         return if record.status.inactive? || record.status.unactive?
-        inactive_at.value = {record.active_at, Time.utc}.max
+
+        inactive_time = inactive_at.value || Time.utc
+        inactive_at.value = {record.active_at, inactive_time}.max
       end
     end
   end
