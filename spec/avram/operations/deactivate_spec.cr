@@ -2,7 +2,7 @@ require "../../spec_helper"
 
 describe Lucille::Deactivate do
   it "deactivates user" do
-    user = UserFactory.create
+    user = UserFactory.create &.inactive_at(2.days.from_now)
 
     DeactivateUser.update(user) do |operation, updated_user|
       operation.saved?.should be_true
@@ -13,8 +13,8 @@ describe Lucille::Deactivate do
   end
 
   it "allows setting inactive time" do
-    user = UserFactory.create
-    inactive_time = 1.day.from_now
+    user = UserFactory.create &.inactive_at(2.days.from_now)
+    inactive_time = 1.day.from_now.at_beginning_of_second
 
     DeactivateUser.update(
       user,
@@ -23,6 +23,7 @@ describe Lucille::Deactivate do
       operation.saved?.should be_true
 
       updated_user.status.active?.should be_true
+      updated_user.inactive_at.should eq(inactive_time)
       updated_user.status.active?(inactive_time).should be_false
     end
   end
