@@ -58,8 +58,14 @@ macro __enum(enum_name, &block)
         parse value.to_s
       end
 
-      def parse(value : Array)
-        SuccessfulCast(Array({{ enum_name }})).new(value.map { |v| parse!(v) })
+      def parse(values : Array)
+        casts = values.map { |value| parse(value) }
+
+        if casts.any?(&.is_a? FailedCast)
+          FailedCast.new
+        else
+          SuccessfulCast(Array({{ enum_name }})).new(casts.map &.value.not_nil!)
+        end
       end
 
       def to_db(value : {{ enum_name }})
