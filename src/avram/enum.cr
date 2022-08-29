@@ -60,12 +60,11 @@ macro __enum(enum_name, &block)
 
       def parse(values : Array)
         casts = values.map { |value| parse(value) }
+        return FailedCast.new unless casts.all?(SuccessfulCast)
 
-        if casts.any?(&.is_a? FailedCast)
-          FailedCast.new
-        else
-          SuccessfulCast(Array({{ enum_name }})).new(casts.map &.value.not_nil!)
-        end
+        SuccessfulCast(Array({{ enum_name }})).new(
+          casts.map &.as(SuccessfulCast).value
+        )
       end
 
       def to_db(value : {{ enum_name }})
