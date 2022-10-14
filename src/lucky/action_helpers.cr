@@ -6,7 +6,7 @@ module Lucille::ActionHelpers
 
     def remote_ip? : Socket::IPAddress?
       request.remote_address.as(Socket::IPAddress)
-    rescue
+    rescue TypeCastError
     end
 
     def redirect_back(
@@ -29,16 +29,6 @@ module Lucille::ActionHelpers
       redirect_back fallback: fallback.path,
         status: status.value,
         allow_external: allow_external
-    end
-
-    def array_param(param_key, param) : Array(String)
-      if request.headers["Content-Type"]?.try &.downcase.includes?("/json")
-        params.from_json[param_key.to_s][param.to_s].as_a.map(&.to_s)
-      else
-        params.get_all("#{param_key}:#{param}")
-      end
-    rescue KeyError
-      Array(String).new
     end
   end
 end

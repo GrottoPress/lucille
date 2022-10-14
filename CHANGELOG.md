@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [Unreleased] - 
+
+### Added
+- Add `FakeParams`
+
+### Changed
+- Upgrade to support *Lucky* v1.0.0-rc1
+- Rename `#to_param_string` spec helper to `#to_param`
+
+### Removed
+- Remove `Lucille::ActionHelpers#array_param`
+
 ## [0.6.0] - 2022-09-22
 
 ### Added
