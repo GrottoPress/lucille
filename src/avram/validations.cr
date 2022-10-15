@@ -22,6 +22,8 @@ class String
     return false if empty? || !url?
     scheme = URI.parse(self).scheme
     scheme.nil? || scheme.downcase.in?({"http", "https"})
+  rescue URI::Error
+    false
   end
 
   def url? : Bool
