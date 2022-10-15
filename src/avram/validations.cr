@@ -45,29 +45,15 @@ class String
   end
 
   def ip? : Bool
-    ip4? || ip6?
+    Socket::IPAddress.valid?(self)
   end
 
   def ip4? : Bool
-    Socket::IPAddress.new(self, 0).ip4?
-  rescue Socket::Error
-    false
+    Socket::IPAddress.valid_v4?(self)
   end
 
   def ip6? : Bool
-    Socket::IPAddress.new(self, 0).ip6?
-  rescue Socket::Error
-    false
-  end
-end
-
-struct Socket::IPAddress
-  def ip6? : Bool
-    !!ip6?(address)
-  end
-
-  def ip4? : Bool
-    !!ip4?(address)
+    Socket::IPAddress.valid_v6?(self)
   end
 end
 
