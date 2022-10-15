@@ -38,7 +38,7 @@ class String
 
     valid && (uri.fragment.nil? ||
       uri.fragment.to_s.matches?(/^[a-z0-9\-\_\.\%\+]+$/i))
-  rescue
+  rescue URI::Error
     false
   end
 
@@ -48,13 +48,13 @@ class String
 
   def ip4? : Bool
     Socket::IPAddress.new(self, 0).ip4?
-  rescue
+  rescue Socket::Error
     false
   end
 
   def ip6? : Bool
     Socket::IPAddress.new(self, 0).ip6?
-  rescue
+  rescue Socket::Error
     false
   end
 end
