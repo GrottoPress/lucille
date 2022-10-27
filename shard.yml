@@ -16,7 +16,8 @@ dependencies:
     version: ~> 0.1.0
   rex:
     github: GrottoPress/rex
-    version: ~> 0.1.0
+    # version: ~> 0.1.0
+    branch: master
 
 development_dependencies:
   ameba:
