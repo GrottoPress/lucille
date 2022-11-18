@@ -251,7 +251,7 @@ module Avram
     def validate_not_pwned(
       *attributes,
       message : Attribute::ErrorMessage = "appears in a known data breach",
-      remote_fail : Attribute::ErrorMessage? = "validation failed. Try again."
+      remote_fail : Attribute::ErrorMessage? = nil
     )
       attributes.each do |attribute|
         attribute.value.try do |value|

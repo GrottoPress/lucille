@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Changed
 - Upgrade to support *Crystal* v1.6
+- Remove default remote failure message for `Avram::Validations.validate_not_pwned`
 
 ## [0.7.0] - 2022-10-15
 
