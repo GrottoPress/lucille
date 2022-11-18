@@ -258,11 +258,8 @@ module Avram
           attribute.add_error(message) if Pawn.pwned?(value)
         end
       rescue error
-        if remote_fail
-          attribute.add_error(remote_fail.to_s)
-        else
-          raise error
-        end
+        raise error unless remote_fail
+        attribute.add_error(remote_fail)
       end
     end
   end
