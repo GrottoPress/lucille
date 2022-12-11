@@ -40,7 +40,7 @@ module Lucille::Status
       @inactive_time.try { |inactive_time| inactive_time - @active_time }
     end
 
-    def to_s(io)
+    def to_s(io : IO)
       io << at(Time.utc)
     end
 
