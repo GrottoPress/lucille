@@ -44,7 +44,7 @@ module Lucille::Status
       io << at(Time.utc)
     end
 
-    def to_json(json)
+    def to_json(json : JSON::Builder)
       json.string(to_s)
     end
   end
