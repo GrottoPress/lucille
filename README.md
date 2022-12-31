@@ -81,6 +81,7 @@
   - `Lucille::Activate`
   - `Lucille::Deactivate`
   - `Lucille::SetUserIdFromUser`
+  - `Lucille::UserFromUserId`
   - `Lucille::ValidateStatus`
 
 - #### Queries

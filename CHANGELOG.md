@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased] - 
 
+### Add
+- Add `Lucille::UserFromUserId` operation mixin
+
 ### Fixed
 - Add parameter type restriction to `Lucille::Status#to_s`
 - Add parameter type restriction to `Lucille::Status#to_json`
