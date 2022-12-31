@@ -83,6 +83,7 @@
   - `Lucille::SetUserIdFromUser`
   - `Lucille::UserFromUserId`
   - `Lucille::ValidateStatus`
+  - `Lucille::ValidateUserExists`
 
 - #### Queries
 
@@ -137,6 +138,7 @@ en:
     error:
       active_at_required: Active time is required
       inactive_at_earlier: Inactive time cannot be earlier than active time
+      user_not_found: User does not exist
 ```
 
 ## Development

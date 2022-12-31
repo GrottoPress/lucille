@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Add
 - Add `Lucille::UserFromUserId` operation mixin
+- Add `Lucille::ValidateUserExists` operation mixin
 
 ### Fixed
 - Add parameter type restriction to `Lucille::Status#to_s`
