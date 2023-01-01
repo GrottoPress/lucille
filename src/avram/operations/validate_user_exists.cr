@@ -10,7 +10,7 @@ module Lucille::ValidateUserExists
       return unless user_id.changed?
 
       user_id.value.try do |value|
-        return if user
+        return if user!
 
         user_id.add_error Rex.t(
           :"operation.error.user_not_found",
