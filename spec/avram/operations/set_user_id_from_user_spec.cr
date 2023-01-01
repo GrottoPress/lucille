@@ -20,7 +20,7 @@ describe Lucille::SetUserIdFromUser do
         _password_reset.user_id.should eq(user.id)
       end
 
-      operation.user!.try(&.id).should eq(user.id)
+      operation.user.try(&.id).should eq(user.id)
     end
   end
 end

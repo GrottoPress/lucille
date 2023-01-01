@@ -15,6 +15,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Add parameter type restriction to `Lucille::Status#to_s`
 - Add parameter type restriction to `Lucille::Status#to_json`
 
+### Removed
+- Remove `Lucille::SetUserIdFromUser#user!` method
+
 ## [0.8.0] - 2022-11-21
 
 ### Changed
