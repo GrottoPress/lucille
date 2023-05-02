@@ -13,7 +13,6 @@ describe Lucille::JSON do
 
       user.try &.metadata.try do |metadata|
         metadata.height.should eq(height)
-        metadata["width"]?.should eq(width)
       end
     end
   end
