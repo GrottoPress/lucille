@@ -143,15 +143,13 @@ en:
 
 ## Development
 
-Create a `.env.sh` file:
+Create a `.env` file:
 
 ```bash
-#!/bin/bash
-
-export DATABASE_URL='postgres://postgres:password@localhost:5432/lucille_spec'
+DATABASE_URL='postgres://postgres:password@localhost:5432/lucille_spec'
 ```
 
-Update the file with your own details. Then run tests with `source .env.sh && crystal spec`.
+Update the file with your own details. Then run tests with `crystal spec`.
 
 ## Contributing
 
