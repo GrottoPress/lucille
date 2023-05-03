@@ -7,7 +7,7 @@ module Lucille::JSON
     end
 
     def merge(**other) : self
-      merge(other.to_h)
+      merge(other.to_h.transform_keys(&.to_s))
     end
 
     def merge(other : ::Hash) : self
