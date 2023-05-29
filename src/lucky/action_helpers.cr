@@ -1,12 +1,11 @@
 module Lucille::ActionHelpers
   macro included
     def remote_ip : Socket::IPAddress
-      remote_ip?.not_nil!
+      request.remote_address.as(Socket::IPAddress)
     end
 
     def remote_ip? : Socket::IPAddress?
-      request.remote_address.as(Socket::IPAddress)
-    rescue TypeCastError
+      request.remote_address.as?(Socket::IPAddress)
     end
 
     def redirect_back(
