@@ -1,24 +1,29 @@
-def have_error(message : String? = nil)
+def have_error(message = nil)
   Lucille::HaveErrorExpectation.new(message)
 end
 
-def have_error(key : Symbol, message : String? = nil)
+def have_error(key : Symbol, message = nil)
   Lucille::HaveErrorExpectation.new(message, key)
 end
 
 struct Lucille::HaveErrorExpectation
-  def initialize(@message : String? = nil, @key : Symbol? = nil)
+  def initialize(@message : Regex? = nil, @key : Symbol? = nil)
+  end
+
+  def self.new(message : String? = nil, key = nil)
+    regex = message.try { |_message| /#{_message}/ }
+    new(regex, key)
   end
 
   def match(attribute : Avram::Attribute) : Bool
     return !attribute.errors.empty? unless @message
-    attribute.errors.any?(&.includes? @message.not_nil!)
+    attribute.errors.any?(&.=~ @message.not_nil!)
   end
 
   def match(operation : Avram::Callbacks)
     errors = operation.errors[@key.not_nil!]?
     return !!errors.try(&.empty?.!) unless @message
-    !!errors.try(&.any? &.includes? @message.not_nil!)
+    !!errors.try(&.any? &.=~ @message.not_nil!)
   end
 
   def failure_message(attribute : Avram::Attribute) : String

@@ -14,7 +14,7 @@ describe Lucille::HaveErrorExpectation do
         attribute.add_error("is required")
 
         attribute.should have_error
-        attribute.should have_error("is required")
+        attribute.should have_error(/\srequired$/)
 
         operation = CreateUser.new
         operation.email.add_error("is required")
