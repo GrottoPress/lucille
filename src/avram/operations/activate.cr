@@ -7,7 +7,7 @@ module Lucille::Activate
     include Lucille::ValidateStatus
 
     private def set_default_active_at
-      return if active_at.value
+      return unless active_at.value.nil?
       active_at.value = Time.utc
     end
   end
