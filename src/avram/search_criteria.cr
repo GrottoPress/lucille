@@ -4,7 +4,7 @@ class String::Lucky::Criteria(T, V) < Avram::Criteria(T, V)
     pattern = "%#{split}%"
     leading = PG::EscapeHelper.escape_literal("#{split}%")
 
-    ilike(pattern).order_by("#{column} ILIKE #{leading}", :desc)
-      .order_by("length(#{column})", :asc)
+    ilike(pattern).order_by("#{column} ILIKE #{leading}", :DESC)
+      .order_by("LENGTH(#{column})", :ASC)
   end
 end
