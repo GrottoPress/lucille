@@ -60,6 +60,11 @@ struct Lucille::HaveErrorExpectation
   end
 
   private def list(errors)
-    errors.map { |error| "  - #{error}" }.join("\n")
+    errors.map do |error|
+      <<-ERROR
+        - #{error}
+
+      ERROR
+    end.join
   end
 end
