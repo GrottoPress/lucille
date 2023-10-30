@@ -1,17 +1,33 @@
 require "./avram"
 
 module Avram
+  class Credentials
+    # See <https://github.com/luckyframework/avram/pull/942/files>
+    #
+    # This is the full connection string used
+    # to connect to the PostgreSQL server.
+    def connection_string : String
+      String.build do |io|
+        set_url_protocol(io)
+        set_url_creds(io)
+        set_url_host(io)
+        set_url_port(io)
+      end
+    end
+  end
+
   class Database::DatabaseCleaner
     def truncate
       return if table_names.empty?
 
       # Removed `RESTART IDENTITY`
-      # See https://github.com/cockroachdb/cockroach/issues/38931
+      # See <https://github.com/cockroachdb/cockroach/issues/38931>
       statement = "TRUNCATE TABLE #{table_names.join(", ")} CASCADE;"
       database.exec(statement)
     end
   end
 
+  # See <https://github.com/luckyframework/avram/pull/942/files>
   class Migrator::Runner
     def self.create_db(quiet? : Bool = false)
       DB.connect("#{credentials.connection_string}/#{db_user}") do |db|
