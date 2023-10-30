@@ -108,11 +108,11 @@ jobs:
         run: |
           sudo apt -y install tar wget
           sudo mkdir -p /usr/local/lib/cockroach
-          wget https://binaries.cockroachdb.com/cockroach-${{ matrix.cockroachdb }}.linux-amd64.tgz
-          tar -xzf cockroach-${{ matrix.cockroachdb }}.linux-amd64.tgz
-          sudo cp -f cockroach-${{ matrix.cockroachdb }}.linux-amd64/cockroach /usr/local/bin/
+          wget -O cockroachdb.tgz https://binaries.cockroachdb.com/cockroach-${{ matrix.cockroachdb }}.linux-amd64.tgz
+          tar -xzf cockroachdb.tgz
+          sudo cp -f cockroach-*/cockroach /usr/local/bin/
           sudo chmod +x /usr/local/bin/cockroach
-          sudo cp -rf cockroach-${{ matrix.cockroachdb }}.linux-amd64/lib/* /usr/local/lib/cockroach/
+          sudo cp -rf cockroach-*/lib/* /usr/local/lib/cockroach/
         working-directory: /tmp
       - name: Start CockroachDB
         run: cockroach start-single-node --insecure --listen-addr=localhost:36257 --sql-addr=localhost:26257 --background
