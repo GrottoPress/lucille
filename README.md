@@ -35,11 +35,20 @@
    #     require "lucille/spec/carbon"
    #     require "lucille/spec/lucky"
 
-   # If using Cockroach DB:
+   # ...
+   ```
+
+1. Require `lucille/cockroach`, if using Cockroach DB:
+
+   ```crystal
+   # ...
+
+   require "lucille/cockroach"
+   # This monkey patches *Avram*, where necessary, to support Cockroach DB.
    #
-   #   require "lucille/cockroach"
-   #
-   #   This monkey patches *Avram*, where necessary, to support Cockroach DB.
+   # In addition, do the following:
+   # - Replace `fill_existing_with:` arguments in migrations with `default:`
+   # - Remove `citext` extension from migrations
 
    # ...
    ```

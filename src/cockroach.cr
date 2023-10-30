@@ -27,11 +27,12 @@ module Avram
     end
   end
 
-  # See <https://github.com/luckyframework/avram/pull/942/files>
   class Migrator::Runner
     def self.create_db(quiet? : Bool = false)
       DB.connect("#{credentials.connection_string}/#{db_user}") do |db|
-        db.exec "CREATE DATABASE #{db_name}" # Removed `WITH OWNER DEFAULT`
+        # Removed `WITH OWNER DEFAULT`
+        # See <https://github.com/luckyframework/avram/pull/942/files>
+        db.exec "CREATE DATABASE #{db_name}"
       end
       unless quiet?
         puts "Done creating #{db_name.colorize(:green)}"
