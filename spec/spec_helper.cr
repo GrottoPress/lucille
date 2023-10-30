@@ -5,6 +5,7 @@ require "./support/boot"
 require "./setup/**"
 
 require "../src/spec"
+require "../src/cockroach"
 
 include Carbon::Expectations
 include Lucky::RequestExpectations

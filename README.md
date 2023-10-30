@@ -35,6 +35,12 @@
    #     require "lucille/spec/carbon"
    #     require "lucille/spec/lucky"
 
+   # If using Cockroach DB:
+   #
+   #   require "lucille/cockroach"
+   #
+   #   This monkey patches *Avram*, where necessary, to support Cockroach DB.
+
    # ...
    ```
 
