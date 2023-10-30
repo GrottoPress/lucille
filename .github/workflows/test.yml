@@ -82,7 +82,8 @@ jobs:
         experimental: [false]
         shard_file: [shard.yml, shard.latest.yml]
         include:
-          - crystal: '1.6.0'
+          - cockroachdb: latest
+            crystal: latest
             experimental: true
             shard_file: shard.edge.yml
     runs-on: ubuntu-latest
