@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased] - 
 
 ### Added
+- Add support for Lucky v1.1
 - Add support for regex to `#have_error` spec expectations
 
 ## [1.0.1] - 2023-10-27
