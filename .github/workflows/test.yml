@@ -105,10 +105,6 @@ jobs:
         run: shards update --skip-postinstall --skip-executables
         env:
           SHARDS_OVERRIDE: ${{ matrix.shard_file }}
-      - name: Install Postgresql
-        run: sudo apt -y install postgresql
-      - name: Stop Postgresql
-        run: sudo systemctl stop postgresql
       - name: Install CockroachDB
         run: |
           sudo apt -y install tar wget
