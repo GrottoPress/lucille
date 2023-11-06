@@ -5,7 +5,6 @@ require "./support/boot"
 require "./setup/**"
 
 require "../src/spec"
-require "../src/cockroach"
 
 Habitat.raise_if_missing_settings!
 
