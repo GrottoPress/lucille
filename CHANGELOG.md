@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Changed
 - Add `luckyframework/avram` shard as an explicit dependency
+- Add `luckyframework/lucky` shard as an explicit dependency
 
 ## [1.0.1] - 2023-10-27
 

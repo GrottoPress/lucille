@@ -14,6 +14,9 @@ dependencies:
   avram:
     github: luckyframework/avram
     version: ~> 1.0
+  lucky:
+    github: luckyframework/lucky
+    version: ~> 1.0
   pawn:
     github: GrottoPress/pawn
     version: ~> 1.0
@@ -28,9 +31,6 @@ development_dependencies:
   carbon:
     github: luckyframework/carbon
     version: ~> 0.3.0
-  lucky:
-    github: luckyframework/lucky
-    version: ~> 1.0
   lucky_env:
     github: luckyframework/lucky_env
     version: ~> 0.1.4
