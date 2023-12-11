@@ -11,6 +11,9 @@ license: MIT
 crystal: ~> 1.6
 
 dependencies:
+  avram:
+    github: luckyframework/avram
+    version: ~> 1.0
   pawn:
     github: GrottoPress/pawn
     version: ~> 1.0
@@ -22,9 +25,6 @@ development_dependencies:
   ameba:
     github: crystal-ameba/ameba
     version: ~> 1.2.0
-  avram:
-    github: luckyframework/avram
-    version: ~> 1.0
   carbon:
     github: luckyframework/carbon
     version: ~> 0.3.0

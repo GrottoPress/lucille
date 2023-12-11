@@ -12,6 +12,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Add support for regex to `#have_error` spec expectations
 - Add support for Cockroach DB
 
+### Changed
+- Add `luckyframework/avram` shard as an explicit dependency
+
 ## [1.0.1] - 2023-10-27
 
 ### Fixed
