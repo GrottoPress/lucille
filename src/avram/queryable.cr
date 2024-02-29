@@ -1,4 +1,6 @@
 module Avram::Queryable(T)
+  # Add ` FOR UPDATE` to the statement to fix concurrency bug
+  # in `.validate_uniqueness_of` calls
   def any? : Bool
     cache_store.fetch(cache_key(:any?), as: Bool) do
       queryable = clone
