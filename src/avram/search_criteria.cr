@@ -1,6 +1,6 @@
 class String::Lucky::Criteria(T, V) < Avram::Criteria(T, V)
   def search(for keywords)
-    split = keywords.split.join('%')
+    split = keywords[0, 255].split.join('%')
     pattern = "%#{split}%"
     leading = PG::EscapeHelper.escape_literal("#{split}%")
 
