@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Fixed
 - Fix CI issues with Lucky v1.2
+- Check email and domain lengths with `String#bytesize` instead of `String#size`
 
 ## [1.1.2] - 2024-03-01
 

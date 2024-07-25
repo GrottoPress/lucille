@@ -5,13 +5,13 @@ class String
   # - https://support.google.com/mail/answer/9211434
   def email? : Bool
     address, _, domain = partition('@')
-    return false if address.empty? || address.size > 64 || !domain.domain?
+    return false if address.empty? || address.bytesize > 64 || !domain.domain?
     address.matches?(/^[a-z\_](?:[a-z0-9\_]*(?<!\.)\.?)*(?<!\.)$/i)
   end
 
   # Reference: https://en.wikipedia.org/wiki/Domain_Name_System
   def domain? : Bool
-    return false if empty? || size > 253
+    return false if empty? || bytesize > 253
 
     matches?(
       /^(?:[a-z0-9][a-z0-9\-]{0,62}(?<!\-)\.)+[a-z][a-z0-9\-]{1,19}(?<!\-)$/i
