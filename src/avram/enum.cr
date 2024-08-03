@@ -20,10 +20,6 @@ macro __enum(enum_name, &block)
       @raw = Raw.parse(value)
     end
 
-    def initialize(value : Symbol)
-      @raw = initialize(value.to_s)
-    end
-
     delegate :to_s, to: @raw
     forward_missing_to @raw
 
