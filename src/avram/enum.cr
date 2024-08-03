@@ -8,20 +8,16 @@
 #
 # `__enum` saves enum members as `String` instead.
 macro __enum(enum_name, &block)
-  enum Raw{{ enum_name }}
-    {{ block.body }}
-  end
-
   struct {{ enum_name }}
-    def self.adapter
-      Lucky
+    private enum Raw
+      {{ block.body }}
     end
 
-    def initialize(@raw : Raw{{ enum_name }})
+    def initialize(@raw : Raw)
     end
 
     def initialize(value : String)
-      @raw = Raw{{ enum_name }}.parse(value)
+      @raw = Raw.parse(value)
     end
 
     def initialize(value : Symbol)
@@ -32,7 +28,11 @@ macro __enum(enum_name, &block)
     forward_missing_to @raw
 
     def self.raw
-      Raw{{ enum_name }}
+      Raw
+    end
+
+    def self.adapter
+      Lucky
     end
 
     module Lucky
