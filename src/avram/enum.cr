@@ -16,8 +16,8 @@ macro __enum(enum_name, &block)
     def initialize(@raw : Raw)
     end
 
-    def initialize(value : String)
-      @raw = Raw.parse(value)
+    def self.new(value : String)
+      new Raw.parse(value)
     end
 
     delegate :to_s, to: @raw
