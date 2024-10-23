@@ -10,6 +10,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Changed
 - Make the raw enum private in `.__enum` macro
 
+### Fixed
+- Fix wrong parameter type restriction for `Lucille::HaveErrorExpectation#match`
+
 ## [1.1.3] - 2024-07-25
 
 ### Fixed

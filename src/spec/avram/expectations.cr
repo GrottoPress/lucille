@@ -1,3 +1,7 @@
+# This is now part of Avram
+#
+# See <https://github.com/luckyframework/avram/pull/1062>
+
 def have_error(message = nil)
   Lucille::HaveErrorExpectation.new(message)
 end
@@ -20,31 +24,31 @@ struct Lucille::HaveErrorExpectation
     attribute.errors.any?(&.=~ @message.not_nil!)
   end
 
-  def match(operation : Avram::Callbacks)
+  def match(operation : Avram::OperationErrors) : Bool
     errors = operation.errors[@key.not_nil!]?
     return !!errors.try(&.empty?.!) unless @message
     !!errors.try(&.any? &.=~ @message.not_nil!)
   end
 
   def failure_message(attribute : Avram::Attribute) : String
-    if @message
-      "Expected :#{attribute.name} to have the error '#{@message}'"
-    else
-      "Expected :#{attribute.name} to have an error"
+    @message.try do |message|
+      return "Expected :#{attribute.name} to have the error '#{message.source}'"
     end
+
+    "Expected :#{attribute.name} to have an error"
   end
 
-  def failure_message(operation : Avram::Callbacks) : String
-    if @message
-      "Expected :#{@key.not_nil!} to have the error '#{@message}'"
-    else
-      "Expected :#{@key.not_nil!} to have an error"
+  def failure_message(operation : Avram::OperationErrors) : String
+    @message.try do |message|
+      return "Expected :#{@key.not_nil!} to have the error '#{message.source}'"
     end
+
+    "Expected :#{@key.not_nil!} to have an error"
   end
 
   def negative_failure_message(attribute : Avram::Attribute) : String
     @message.try do |message|
-      return "Expected :#{attribute.name} to not have the error '#{message}'"
+      return "Expected :#{attribute.name} to not have the error '#{message.source}'"
     end
 
     <<-MSG
@@ -53,9 +57,9 @@ struct Lucille::HaveErrorExpectation
     MSG
   end
 
-  def negative_failure_message(operation : Avram::Callbacks) : String
+  def negative_failure_message(operation : Avram::OperationErrors) : String
     @message.try do |message|
-      return "Expected :#{@key.not_nil!} to not have the error '#{message}'"
+      return "Expected :#{@key.not_nil!} to not have the error '#{message.source}'"
     end
 
     <<-MSG
@@ -65,11 +69,11 @@ struct Lucille::HaveErrorExpectation
   end
 
   private def list(errors)
-    errors.map do |error|
+    errors.join do |error|
       <<-ERROR
         - #{error}
 
       ERROR
-    end.join
+    end
   end
 end
