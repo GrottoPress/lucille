@@ -57,7 +57,7 @@ struct FakeNestedParams
   end
 
   def many_nested?(key : String) : Array(Hash(String, String))
-    Hash(String, String).new
+    Array(Hash(String, String)).new
   end
 
   def get(key)
