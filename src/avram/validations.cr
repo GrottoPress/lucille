@@ -139,9 +139,7 @@ module Avram
     )
       attributes.each do |attribute|
         attribute.value.try do |value|
-          if value.matches?(/^(?!-)[a-zA-Z0-9-]{1,63}(?<!\-)$/i)
-            next
-          end
+          next if value.matches?(/^(?!-)[a-zA-Z0-9-]{1,63}(?<!\-)$/i)
 
           attribute.add_error(message)
         end
