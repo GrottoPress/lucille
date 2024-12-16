@@ -5,7 +5,7 @@ describe String::Lucky::Criteria do
     {
       "mandela@abc.de",
       "delpiero@abc.de",
-      "gondelar@abc.de",
+      "gondelare@abc.de",
       "del@abc.de",
       "dell@abc.de",
       "andel@abc.de"
@@ -20,7 +20,7 @@ describe String::Lucky::Criteria do
         "andel@abc.de",
         "mandela@abc.de",
         "delpiero@abc.de",
-        "gondelar@abc.de"
+        "gondelare@abc.de"
       ]
     )
   end
