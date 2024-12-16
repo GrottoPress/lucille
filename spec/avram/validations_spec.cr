@@ -922,4 +922,80 @@ describe Avram::Validations do
       password.valid?.should be_false
     end
   end
+
+  describe "#validate_phone_number" do
+    it "accepts valid phone number" do
+      numbers = {
+        Avram::Attribute(String).new(
+          :phone,
+          param: nil,
+          value: "+233-204-333-9667",
+          param_key: "user"
+        ),
+        Avram::Attribute(String).new(
+          :phone,
+          param: nil,
+          value: "020-433-3966",
+          param_key: "user"
+        ),
+        Avram::Attribute(String).new(
+          :phone,
+          param: nil,
+          value: "18005551234",
+          param_key: "user"
+        ),
+        Avram::Attribute(String).new(
+          :phone,
+          param: nil,
+          value: "1 800 555 1234",
+          param_key: "user"
+        ),
+        Avram::Attribute(String).new(
+          :phone,
+          param: nil,
+          value: "(800) 555 1234",
+          param_key: "user"
+        )
+      }
+
+      numbers.each do |number|
+        Avram::Validations.validate_phone_number number
+        number.valid?.should be_true
+      end
+    end
+
+    it "rejects invalid phone number" do
+      numbers = {
+        Avram::Attribute(String).new(
+          :phone,
+          param: nil,
+          value: "+55",
+          param_key: "user"
+        ),
+        Avram::Attribute(String).new(
+          :phone,
+          param: nil,
+          value: "123-333",
+          param_key: "user"
+        ),
+        Avram::Attribute(String).new(
+          :phone,
+          param: nil,
+          value: "123-123-123",
+          param_key: "user"
+        ),
+        Avram::Attribute(String).new(
+          :phone,
+          param: nil,
+          value: "phone number",
+          param_key: "user"
+        )
+      }
+
+      numbers.each do |number|
+        Avram::Validations.validate_phone_number number
+        number.valid?.should be_false
+      end
+    end
+  end
 end

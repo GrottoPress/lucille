@@ -55,6 +55,13 @@ class String
   def ip6? : Bool
     Socket::IPAddress.valid_v6?(self)
   end
+
+  # See <https://stackoverflow.com/a/16702965>
+  def phone? : Bool
+    matches?(
+      /^(?:\+?(\d{1,3}))?[\-\.\s\(]*(\d{3})[\-\.\s\)]*(\d{3})[\-\.\s]*(\d{4})(?:\s*x(\d+))?$/
+    )
+  end
 end
 
 module Avram
@@ -258,6 +265,17 @@ module Avram
       rescue error
         raise error unless remote_fail
         attribute.add_error(remote_fail)
+      end
+    end
+
+    def validate_phone_number(
+      *attributes,
+      message : Attribute::ErrorMessage = "is invalid"
+    )
+      attributes.each do |attribute|
+        attribute.value.try do |value|
+          attribute.add_error(message) unless value.phone?
+        end
       end
     end
   end
