@@ -929,7 +929,7 @@ describe Avram::Validations do
         Avram::Attribute(String).new(
           :phone,
           param: nil,
-          value: "+233-204-333-9667",
+          value: "+233-204-333-966",
           param_key: "user"
         ),
         Avram::Attribute(String).new(
@@ -981,7 +981,7 @@ describe Avram::Validations do
         Avram::Attribute(String).new(
           :phone,
           param: nil,
-          value: "123-123-123",
+          value: "123-123/123",
           param_key: "user"
         ),
         Avram::Attribute(String).new(

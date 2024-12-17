@@ -58,9 +58,7 @@ class String
 
   # See <https://stackoverflow.com/a/16702965>
   def phone? : Bool
-    matches?(
-      /^(?:\+?(\d{1,3}))?[\-\.\s\(]*(\d{3})[\-\.\s\)]*(\d{3})[\-\.\s]*(\d{4})(?:\s*x(\d+))?$/
-    )
+    matches?(/^(?:\+?(\d{1,3}))?[\-\.\s\(]*(\d{3})[\-\.\s\)]*(\d{3})[\-\.\s]*(\d{3,4})(?:\s*x(\d+))?$/)
   end
 end
 
