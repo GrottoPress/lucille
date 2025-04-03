@@ -106,6 +106,10 @@
 
   - `Lucille::ActionHelpers`
 
+- #### Server
+
+  - `Lucky::BaseAppServer#listen` implementation that allows running multiple server sockets. The number of sockets (default: 1) can be changed by overriding the `#workers` method.
+
 - #### Annotations
 
   - `Memoize`: Invokes *Lucky*'s `.memoize` macro
