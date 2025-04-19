@@ -19,7 +19,7 @@ dependencies:
     version: ~> 1.0
   pawn:
     github: GrottoPress/pawn
-    version: ~> 1.0
+    version: '>= 1.0, < 3.0'
   rex:
     github: GrottoPress/rex
     version: ~> 1.0
