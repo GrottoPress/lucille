@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased] - 
 
+### Added
+- Add support for Lucky v1.4
+
 ### Fixed
 - Fix compile error calling `.compare_versions` with `Lucille::VERSION`
 
