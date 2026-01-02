@@ -14,7 +14,7 @@ struct Lucille::HaveErrorExpectation
   def initialize(@message : Regex? = nil, @key : Symbol? = nil)
   end
 
-  def self.new(message : String? = nil, key = nil)
+  def self.new(message : String, key = nil)
     regex = message.try { |_message| /#{_message}/ }
     new(regex, key)
   end
