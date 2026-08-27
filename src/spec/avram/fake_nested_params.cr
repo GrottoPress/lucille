@@ -9,13 +9,21 @@ struct FakeNestedParams
   end
 
   def self.new(**params)
-    hash = params.to_h.transform_keys(&.to_s)
-      .transform_values &.to_h.transform_keys(&.to_s)
-      .transform_values do |value|
-        value.is_a?(Array) ?
-          value.map { |_value| to_param(_value) } :
-          to_param(value)
+    hash = Hash(String, Hash(String, Array(String) | String)).new
+
+    params.to_h.each do |key, value|
+      inner = Hash(String, Array(String) | String).new
+
+      value.to_h.each do |inner_key, inner_value|
+        inner[inner_key.to_s] = if inner_value.is_a?(Array)
+          inner_value.map { |_value| to_param(_value) }
+        else
+          to_param(inner_value)
+        end
       end
+
+      hash[key.to_s] = inner
+    end
 
     new(hash)
   end
