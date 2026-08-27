@@ -10,10 +10,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 - Add `FakeParams.new(NamedTuple)` overload
 - Add `FakeNestedParams.new(NamedTuple)` overload
+- Add support for many nested params to `FakeNestedParams`
 
 ### Fixed
 - Fix compile error when `FakeParams.new` is called without arguments
 - Fix compile error when `FakeNestedParams.new` is called without arguments
+
+### Removed
+- Remove `FakeNestedParams.new(Hash)` overload
 
 ## [1.4.1] - 2025-06-05
 
