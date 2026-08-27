@@ -9,13 +9,15 @@ struct FakeParams
   end
 
   def self.new(**params)
-    hash = params.to_h
-      .transform_keys(&.to_s)
-      .transform_values do |value|
-        value.is_a?(Array) ?
-          value.map { |_value| to_param(_value) } :
-          to_param(value)
+    hash = Hash(String, Array(String) | String).new
+
+    params.to_h.each do |key, value|
+      hash[key.to_s] = if value.is_a?(Array)
+        value.map { |_value| to_param(_value) }
+      else
+        to_param(value)
       end
+    end
 
     new(hash)
   end
