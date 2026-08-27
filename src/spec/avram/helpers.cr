@@ -13,6 +13,6 @@ def params(*args, **named_args)
   FakeParams.new(*args, **named_args)
 end
 
-def nested_params(**named_args)
-  FakeNestedParams.new(**named_args)
+def nested_params(*args, **named_args)
+  FakeNestedParams.new(*args, **named_args)
 end
