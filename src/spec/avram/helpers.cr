@@ -9,8 +9,8 @@ def to_param(value)
   end
 end
 
-def params(**named_args)
-  FakeParams.new(**named_args)
+def params(*args, **named_args)
+  FakeParams.new(*args, **named_args)
 end
 
 def nested_params(**named_args)

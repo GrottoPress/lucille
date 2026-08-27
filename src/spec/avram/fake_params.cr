@@ -9,6 +9,10 @@ struct FakeParams
   end
 
   def self.new(**params)
+    new(params)
+  end
+
+  def self.new(params : NamedTuple)
     hash = Hash(String, Array(String) | String).new
 
     params.to_h.each do |key, value|
