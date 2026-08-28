@@ -1,12 +1,5 @@
-struct FakeNestedParams
+struct FakeParams
   include Avram::Paramable
-
-  @hash : Hash(String, Union(
-    Hash(String, Array(String) | String),
-    Array(Hash(String, String)),
-    Array(String),
-    String
-  ))
 
   def initialize(params : NamedTuple)
     @hash = Hash(String, Union(
@@ -75,7 +68,7 @@ struct FakeNestedParams
 
   def many_nested?(key : String | Symbol) : Array(Hash(String, String))
     @hash[key.to_s]?.try do |array|
-      next array if array.is_a?(Array(Hash(String, String)))
+      array if array.is_a?(Array(Hash(String, String)))
     end || Array(Hash(String, String)).new
   end
 
@@ -85,7 +78,7 @@ struct FakeNestedParams
 
   def get?(key : String | Symbol) : String?
     @hash[key.to_s]?.try do |string|
-      next string if string.is_a?(String)
+      string if string.is_a?(String)
     end
   end
 
@@ -95,7 +88,7 @@ struct FakeNestedParams
 
   def get_all?(key : String | Symbol)
     @hash[key.to_s]?.try do |array|
-      next array if array.is_a?(Array(String))
+      array if array.is_a?(Array(String))
     end
   end
 
