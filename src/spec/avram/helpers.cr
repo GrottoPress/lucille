@@ -9,10 +9,6 @@ def to_param(value)
   end
 end
 
-def params(*args, **named_args)
-  FakeParams.new(*args, **named_args)
-end
-
-def nested_params(*args, **named_args)
+def fake_params(*args, **named_args)
   FakeNestedParams.new(*args, **named_args)
 end

@@ -8,10 +8,10 @@ end
 
 describe Lucille::ValidateStatus do
   it "requires active time" do
-    SpecCreateUser.create(params(
+    SpecCreateUser.create(fake_params(user: {
       email: "me@example.net",
       level: :admin
-    )) do |operation, user|
+    })) do |operation, user|
       user.should be_nil
 
       operation.active_at
@@ -20,12 +20,12 @@ describe Lucille::ValidateStatus do
   end
 
   it "ensures active time is not later than inactive time" do
-    SpecCreateUser.create(params(
+    SpecCreateUser.create(fake_params(user: {
       email: "me@example.net",
       level: :admin,
       active_at: Time.utc,
       inactive_at: 2.days.ago.to_utc
-    )) do |operation, user|
+    })) do |operation, user|
       user.should be_nil
 
       operation.inactive_at

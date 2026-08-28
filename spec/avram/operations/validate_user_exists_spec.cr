@@ -15,11 +15,11 @@ end
 
 describe Lucille::ValidateUserExists do
   it "validates user exists" do
-    SavePasswordReset.create(params(
+    SavePasswordReset.create(fake_params(password_reset: {
       user_id: 45,
       active_at: Time.utc,
       success: false
-    )) do |operation, password_reset|
+    })) do |operation, password_reset|
       password_reset.should be_nil
       operation.user_id.should have_error("operation.error.user_not_found")
     end
@@ -29,11 +29,11 @@ describe Lucille::ValidateUserExists do
     user = UserFactory.create
 
     SavePasswordReset2.create(
-      params(
+      fake_params(password_reset: {
         user_id: user.id,
         active_at: Time.utc,
         success: false
-      ),
+      }),
       user: nil
     ) do |_, password_reset|
       password_reset.should be_a(PasswordReset)

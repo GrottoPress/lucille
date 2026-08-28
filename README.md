@@ -119,8 +119,7 @@
 - #### Avram
 
   - `#have_error`: Spec expectation that asserts the validity of an attribute
-  - `#nested_params`: Creates nested params
-  - `#params`: Creates params
+  - `#fake_params`: Creates params
 
 - #### Carbon
 

@@ -11,7 +11,7 @@ describe Lucille::SetUserIdFromUser do
     user = UserFactory.create
 
     SavePasswordReset.create(
-      params(active_at: Time.utc, success: false),
+      fake_params(password_reset: {active_at: Time.utc, success: false}),
       user: user
     ) do |operation, password_reset|
       password_reset.should be_a(PasswordReset)
