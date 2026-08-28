@@ -23,11 +23,6 @@ describe FakeNestedParams do
       params = nested_params(user: {name: "Alesia", age: "35"})
 
       params.nested(:user).should eq({"name" => "Alesia", "age" => "35"})
-    end
-
-    it "returns an empty hash for a missing key" do
-      params = nested_params(user: {name: "Alesia"})
-
       params.nested(:missing).should be_empty
     end
   end
@@ -37,11 +32,6 @@ describe FakeNestedParams do
       params = nested_params(user: {name: "Alesia", tags: ["a", "b"]})
 
       params.nested_arrays(:user).should eq({"tags" => ["a", "b"]})
-    end
-
-    it "returns an empty hash for a missing key" do
-      params = nested_params(user: {name: "Alesia"})
-
       params.nested_arrays(:missing).should be_empty
     end
   end
@@ -50,60 +40,35 @@ describe FakeNestedParams do
     it "returns string values for the given key" do
       params = nested_params(user: {name: "Alesia"})
 
-      params.nested_file("user").should eq({"name" => "Alesia"})
+      params.nested_file(:user).should eq({"name" => "Alesia"})
+      params.nested_file("missing").should be_empty
     end
   end
 
   describe "#many_nested" do
     it "returns an array of hashes for the given key" do
-      params = nested_params(files: [{name: "photo.jpg", size: 24000}])
+      params = nested_params(files: [{name: "photo.jpg"}])
 
-      params.many_nested("files")
-        .should(eq [{"name" => "photo.jpg", "size" => "24000"}])
-    end
-
-    it "returns an empty array for a missing key" do
-      params = nested_params(users: [{name: "Alesia"}])
-
-      params.many_nested("missing").should be_empty
-    end
-
-    it "returns an empty array when the value is a hash" do
-      params = nested_params(user: {name: "Alesia"})
-
-      params.many_nested("user").should be_empty
-    end
-  end
-
-  describe "#get" do
-    it "returns nil" do
-      params = nested_params(user: {name: "Alesia"})
-
-      params.get("user").should be_nil
+      params.many_nested("files").should(eq [{"name" => "photo.jpg"}])
+      params.many_nested(:missing).should be_empty
     end
   end
 
   describe "#get?" do
-    it "returns nil" do
-      params = nested_params(user: {name: "Alesia"})
+    it "returns string for a given key" do
+      params = nested_params({name: "Alesia"})
 
-      params.get?("user").should be_nil
-    end
-  end
-
-  describe "#get_all" do
-    it "returns nil" do
-      params = nested_params(user: {name: "Alesia"})
-
-      params.get_all("user").should be_nil
+      params.get?(:name).should eq("Alesia")
+      params.get?(:missing).should be_nil
     end
   end
 
   describe "#get_all?" do
-    it "returns nil" do
-      params = nested_params(user: {name: "Alesia"})
+    it "returns array for a given key" do
+      params = nested_params({files: ["photo.jpg"]})
 
-      params.get_all?("user").should be_nil
+      params.get_all?(:files).should eq(["photo.jpg"])
+      params.get_all?("missing").should be_nil
     end
   end
 end

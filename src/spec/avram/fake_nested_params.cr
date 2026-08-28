@@ -2,22 +2,31 @@ struct FakeNestedParams
   include Avram::Paramable
 
   @hash : Hash(String, Union(
-      Hash(String, Array(String) | String),
-      Array(Hash(String, String))
-    ))
+    Hash(String, Array(String) | String),
+    Array(Hash(String, String)),
+    Array(String),
+    String
+  ))
 
   def initialize(params : NamedTuple)
     @hash = Hash(String, Union(
       Hash(String, Array(String) | String),
-      Array(Hash(String, String))
+      Array(Hash(String, String)),
+      Array(String),
+      String
     )).new
 
     params.to_h.each do |key, value|
       case value
+      when Nil
       when Hash, NamedTuple
         @hash[key.to_s] = build_nested(value)
+      when Array(String), Tuple(String)
+        @hash[key.to_s] = build_many(value)
       when Array, Tuple
         @hash[key.to_s] = build_many_nested(value)
+      else
+        @hash[key.to_s] = to_param(value)
       end
     end
   end
@@ -56,7 +65,7 @@ struct FakeNestedParams
     nested_file?(key)
   end
 
-  def nested_file?(key : String) : Hash(String, String)
+  def nested_file?(key : String | Symbol) : Hash(String, String)
     nested?(key)
   end
 
@@ -64,26 +73,34 @@ struct FakeNestedParams
     many_nested?(key)
   end
 
-  def many_nested?(key : String) : Array(Hash(String, String))
+  def many_nested?(key : String | Symbol) : Array(Hash(String, String))
     @hash[key.to_s]?.try do |array|
-      next array if array.is_a?(Array)
+      next array if array.is_a?(Array(Hash(String, String)))
     end || Array(Hash(String, String)).new
   end
 
   def get(key)
-    get?(key)
+    get?(key).not_nil!
   end
 
-  def get?(key : String)
-    nil
+  def get?(key : String | Symbol) : String?
+    @hash[key.to_s]?.try do |string|
+      next string if string.is_a?(String)
+    end
   end
 
   def get_all(key)
-    get_all?(key)
+    get_all?(key).not_nil!
   end
 
-  def get_all?(key : String)
-    nil
+  def get_all?(key : String | Symbol)
+    @hash[key.to_s]?.try do |array|
+      next array if array.is_a?(Array(String))
+    end
+  end
+
+  def get_all_files(key)
+    get_all(key)
   end
 
   private def build_nested(params)
@@ -111,6 +128,14 @@ struct FakeNestedParams
         end
 
         array << hash unless hash.empty?
+      end
+    end
+  end
+
+  private def build_many(params)
+    Array(String).new.tap do |array|
+      params.each do |param|
+        array << param if param.is_a?(String)
       end
     end
   end
