@@ -1,29 +1,22 @@
 struct FakeParams
   include Avram::Paramable
 
-  @hash : Hash(String, Array(String) | String) | \
-    Hash(String, Array(String)) | \
-    Hash(String, String)
+  @hash : Hash(String, Array(String) | String)
 
-  def initialize(@hash)
-  end
-
-  def self.new(**params)
-    new(params)
-  end
-
-  def self.new(params : NamedTuple)
-    hash = Hash(String, Array(String) | String).new
+  def initialize(params : NamedTuple)
+    @hash = Hash(String, Array(String) | String).new
 
     params.to_h.each do |key, value|
-      hash[key.to_s] = if value.is_a?(Array)
+      @hash[key.to_s] = if value.is_a?(Array)
         value.map { |_value| to_param(_value) }
       else
         to_param(value)
       end
     end
+  end
 
-    new(hash)
+  def self.new(**params)
+    new(params)
   end
 
   def nested(key) : Hash(String, String)

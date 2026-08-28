@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Fix compile error when `FakeNestedParams.new` is called without arguments
 
 ### Removed
+- Remove `FakeParams.new(Hash)` overload
 - Remove `FakeNestedParams.new(Hash)` overload
 
 ## [1.4.1] - 2025-06-05
