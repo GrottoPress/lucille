@@ -23,7 +23,7 @@ struct FakeParams
     nested?(key)
   end
 
-  def nested?(key : String) : Hash(String, String)
+  def nested?(key : String | Symbol) : Hash(String, String)
     Hash(String, String).new.tap do |params|
       @hash.each do |_key, _value|
         params[_key] = _value if _value.is_a?(String)
@@ -35,7 +35,7 @@ struct FakeParams
     nested_arrays?(key)
   end
 
-  def nested_arrays?(key : String) : Hash(String, Array(String))
+  def nested_arrays?(key : String | Symbol) : Hash(String, Array(String))
     Hash(String, Array(String)).new.tap do |params|
       @hash.each do |_key, _value|
         params[_key] = _value if _value.is_a?(Array)
@@ -43,39 +43,39 @@ struct FakeParams
     end
   end
 
-  def many_nested(key : String) : Array(Hash(String, String))
+  def many_nested(key : String | Symbol) : Array(Hash(String, String))
     [nested(key)]
   end
 
-  def many_nested?(key : String) : Array(Hash(String, String))
+  def many_nested?(key : String | Symbol) : Array(Hash(String, String))
     many_nested(key)
   end
 
-  def get(key : String)
+  def get(key : String | Symbol)
     get?(key).not_nil!
   end
 
-  def get?(key : String)
-    @hash[key]?.try { |value| value if value.is_a?(String) }
+  def get?(key : String | Symbol)
+    @hash[key.to_s]?.try { |value| value if value.is_a?(String) }
   end
 
-  def get_all(key : String)
+  def get_all(key : String | Symbol)
     get_all?(key).not_nil!
   end
 
-  def get_all?(key : String)
-    @hash[key]?.try { |value| value if value.is_a?(Array) }
+  def get_all?(key : String | Symbol)
+    @hash[key.to_s]?.try { |value| value if value.is_a?(Array) }
   end
 
-  def nested_file?(key : String) : Hash(String, String)
+  def nested_file?(key : String | Symbol) : Hash(String, String)
     nested?(key)
   end
 
-  def nested_file(key : String) : Hash(String, String)
+  def nested_file(key : String | Symbol) : Hash(String, String)
     nested(key)
   end
 
-  def get_all_files(key : String)
+  def get_all_files(key : String | Symbol)
     get_all(key)
   end
 end
