@@ -36,7 +36,9 @@ def fake_multipart(params)
   FakeMultipartParams.new(params)
 end
 
-def fake_file(content, filename : String) : Lucky::UploadedFile
+def fake_file(content, filename : String? = nil) : Lucky::UploadedFile
+  filename ||= Random.new.hex
+
   headers = HTTP::Headers{
     "Content-Disposition" => %(form-data; name="file"; filename="#{filename}")
   }
