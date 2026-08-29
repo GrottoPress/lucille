@@ -36,12 +36,51 @@ describe FakeParams do
     end
   end
 
-  describe "#nested_file" do
-    it "returns string values for the given key" do
-      params = fake_params({"user" => {:name => "Alesia"}})
+  describe "#get_file" do
+    it "returns uploaded file for the given key" do
+      avatar = fake_file("image-bytes", "avatar.png")
+      params = fake_params(avatar: avatar)
 
-      params.nested_file(:user).should eq({"name" => "Alesia"})
+      params.get_file?(:avatar).not_nil!.filename.should eq("avatar.png")
+      params.get_file?(:missing).should be_nil
+    end
+  end
+
+  describe "#get_all_files" do
+    it "returns array of uploaded files for the given key" do
+      doc = fake_file("doc-bytes", "doc.pdf")
+      params = fake_params(docs: [doc])
+
+      params.get_all_files?(:docs)
+        .not_nil!
+        .map(&.filename)
+        .should(eq ["doc.pdf"])
+
+      params.get_all_files?(:missing).should be_nil
+    end
+  end
+
+  describe "#nested_file" do
+    it "returns uploaded files for the given key" do
+      avatar = fake_file("image-bytes", "avatar.png")
+      params = fake_params({"user" => {:name => "Alesia", :avatar => avatar}})
+
+      params.nested_file(:user)["avatar"].filename.should eq("avatar.png")
+      params.nested_file(:user).keys.should eq(["avatar"])
       params.nested_file("missing").should be_empty
+    end
+  end
+
+  describe "#nested_array_files" do
+    it "returns array of uploaded files for the given key" do
+      photo = fake_file("photo-bytes", "photo.jpg")
+      params = fake_params(user: {photos: [photo]})
+
+      params.nested_array_files?(:user)["photos"]
+        .map(&.filename)
+        .should(eq ["photo.jpg"])
+
+      params.nested_array_files?(:missing).should be_empty
     end
   end
 
