@@ -1,7 +1,7 @@
 struct FakeParams
   include Avram::Paramable
 
-  def initialize(params : NamedTuple)
+  def initialize(params)
     @hash = Hash(String, Union(
       Hash(String, Array(String) | String),
       Array(Hash(String, String)),

@@ -2,7 +2,7 @@ struct FakeMultipartParams
   getter body : IO
   getter content_type : String
 
-  def initialize(params : NamedTuple)
+  def initialize(params)
     @content_type = ""
     io = IO::Memory.new
 

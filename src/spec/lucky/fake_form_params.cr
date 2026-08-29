@@ -1,7 +1,7 @@
 struct FakeFormParams
   getter body : IO
 
-  def initialize(params : NamedTuple)
+  def initialize(params)
     io = IO::Memory.new
     uri_params = URI::Params.new
 

@@ -13,7 +13,7 @@ def fake_json(**params)
   fake_json(params)
 end
 
-def fake_json(params : NamedTuple)
+def fake_json(params)
   headers = HTTP::Headers{"Content-Type" => "application/json"}
   request = HTTP::Request.new("POST", "/", headers, params.to_json)
 
@@ -24,7 +24,7 @@ def fake_form(**params)
   fake_form(params)
 end
 
-def fake_form(params : NamedTuple)
+def fake_form(params)
   headers = HTTP::Headers{"Content-Type" => "application/x-www-form-urlencoded"}
   fake_params = FakeFormParams.new(params)
   request = HTTP::Request.new("POST", "/", headers, fake_params.body)
@@ -36,7 +36,7 @@ def fake_multipart(**params)
   fake_multipart(params)
 end
 
-def fake_multipart(params : NamedTuple)
+def fake_multipart(params)
   multipart = FakeMultipartParams.new(params)
   headers = HTTP::Headers{"Content-Type" => multipart.content_type}
   request = HTTP::Request.new("POST", "/", headers, multipart.body)

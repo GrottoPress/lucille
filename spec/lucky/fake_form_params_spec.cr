@@ -2,7 +2,7 @@ require "../spec_helper"
 
 describe FakeFormParams do
   it "builds form params from a named tuple" do
-    params = fake_form(name: "Paul", age: 30)
+    params = fake_form({:name => "Paul", "age" => 30})
 
     params.get?(:name).should eq("Paul")
     params.get?("age").should eq("30")

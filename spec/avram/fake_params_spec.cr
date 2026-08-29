@@ -20,7 +20,7 @@ describe FakeParams do
 
   describe "#nested" do
     it "returns string values for the given key" do
-      params = fake_params(user: {name: "Alesia", age: "35"})
+      params = fake_params({"user" => {name: "Alesia", age: "35"}})
 
       params.nested(:user).should eq({"name" => "Alesia", "age" => "35"})
       params.nested(:missing).should be_empty
@@ -38,7 +38,7 @@ describe FakeParams do
 
   describe "#nested_file" do
     it "returns string values for the given key" do
-      params = fake_params(user: {name: "Alesia"})
+      params = fake_params({"user" => {:name => "Alesia"}})
 
       params.nested_file(:user).should eq({"name" => "Alesia"})
       params.nested_file("missing").should be_empty
@@ -56,7 +56,7 @@ describe FakeParams do
 
   describe "#get?" do
     it "returns string for a given key" do
-      params = fake_params({name: "Alesia"})
+      params = fake_params({"name" => "Alesia"})
 
       params.get?(:name).should eq("Alesia")
       params.get?(:missing).should be_nil
