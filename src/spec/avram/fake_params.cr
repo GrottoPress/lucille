@@ -3,24 +3,15 @@ struct FakeParams
 
   def initialize(params)
     @hash = Hash(String, Union(
-      Hash(String, Array(String) | String),
-      Array(Hash(String, String)),
+      String,
       Array(String),
-      String
+      Hash(String, String | Array(String)),
+      Array(Hash(String, String))
     )).new
 
     params.to_h.each do |key, value|
-      case value
-      when Nil
-      when Hash, NamedTuple
-        @hash[key.to_s] = build_nested(value)
-      when Indexable(String)
-        @hash[key.to_s] = build_many(value)
-      when Indexable
-        @hash[key.to_s] = build_many_nested(value)
-      else
-        @hash[key.to_s] = to_param(value)
-      end
+      next if value.nil?
+      @hash[key.to_s] = build_params(value)
     end
   end
 
@@ -116,36 +107,29 @@ struct FakeParams
     nested_array?(key)
   end
 
-  private def build_nested(params)
+  private def build_params(params : Hash | NamedTuple)
     Hash(String, Array(String) | String).new.tap do |hash|
       params.to_h.each do |key, value|
-        hash[key.to_s] = if value.is_a?(Array)
-          value.map { |_value| to_param(_value) }
-        else
+        hash[key.to_s] = value.is_a?(Indexable) ?
+          value.map { |_value| to_param(_value) } :
           to_param(value)
-        end
       end
     end
   end
 
-  private def build_many_nested(params)
-    Array(Hash(String, String)).new.tap do |array|
-      params.each do |param|
-        hash = Hash(String, String).new
-
-        case param
-        when Hash, NamedTuple
-          param.to_h.each do |key, value|
-            hash[key.to_s] = to_param(value)
-          end
-        end
-
-        array << hash unless hash.empty?
-      end
+  private def build_params(params : Indexable(Hash) | Indexable(NamedTuple))
+    params.compact_map do |param|
+      hash = Hash(String, String).new
+      param.to_h.each { |key, value| hash[key.to_s] = to_param(value) }
+      hash unless hash.empty?
     end
   end
 
-  private def build_many(params)
+  private def build_params(params : Indexable)
     params.map { |param| to_param(param) }
+  end
+
+  private def build_params(params)
+    to_param(params)
   end
 end
