@@ -5,7 +5,7 @@ describe Lucille::JSON do
     height = 12
 
     CreateUser.create(
-      fake_params(user: {
+      fake_json(user: {
         email: "me@example.net",
         level: :admin,
         height: height

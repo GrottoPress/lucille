@@ -42,7 +42,7 @@ describe Lucille::Activate do
   end
 
   it "activates user in the past" do
-    CreateUser.create(fake_params(user: {
+    CreateUser.create(fake_json(user: {
       email: "me@example.net",
       level: :admin,
       active_at: 2.days.ago.to_utc
