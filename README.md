@@ -125,6 +125,12 @@
 
   - `DevDeliverLaterStrategy`: Delivers mail immediately, in the current fiber.
 
+- #### Lucky
+
+  - `#fake_form`: Create form params
+  - `#fake_json`: Creates JSON params
+  - `#fake_multipart`: Creates multipart params
+
 ## I18n
 
 *Lucille* uses *Rex* for i18n. See <https://github.com/GrottoPress/rex>.

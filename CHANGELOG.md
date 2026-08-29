@@ -11,6 +11,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Add `FakeParams.new(NamedTuple)` overload
 - Add support for nested params to `FakeParams`
 - Add support for many nested params to `FakeParams`
+- Add `FakeFormParams` and `#fake_form` spec helper
+- Add `FakeMultipartParams` and `#fake_multipart` spec helper
+- Add `#fake_json` spec helper
 
 ### Changed
 - Replace `#params` and `#nested_params` spec helpers with `#fake_params`
