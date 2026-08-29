@@ -33,11 +33,7 @@ def fake_multipart(**params)
 end
 
 def fake_multipart(params)
-  multipart = FakeMultipartParams.new(params)
-  headers = HTTP::Headers{"Content-Type" => multipart.content_type}
-  request = HTTP::Request.new("POST", "/", headers, multipart.body)
-
-  Lucky::Params.new(request)
+  FakeMultipartParams.new(params)
 end
 
 def fake_file(content, filename : String) : Lucky::UploadedFile
