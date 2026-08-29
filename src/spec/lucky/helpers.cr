@@ -25,11 +25,7 @@ def fake_form(**params)
 end
 
 def fake_form(params)
-  headers = HTTP::Headers{"Content-Type" => "application/x-www-form-urlencoded"}
-  fake_params = FakeFormParams.new(params)
-  request = HTTP::Request.new("POST", "/", headers, fake_params.body)
-
-  Lucky::Params.new(request)
+  FakeFormParams.new(params)
 end
 
 def fake_multipart(**params)

@@ -1,18 +1,71 @@
 struct FakeFormParams
-  getter body : IO
+  include Avram::Paramable
+
+  @form : Lucky::Params
 
   def initialize(params)
     io = IO::Memory.new
-    uri_params = URI::Params.new
 
-    params.each { |name, value| add_param(uri_params, name.to_s, value) }
-    io << uri_params
+    URI::Params.build(io) do |uri_params|
+      params.each { |name, value| add_param(uri_params, name.to_s, value) }
+    end
 
-    @body = io.rewind
+    @form = build_form(io)
   end
 
   def self.new(**params)
     new(params)
+  end
+
+  forward_missing_to @form
+
+  def get(key)
+    @form.get(key)
+  end
+
+  def get?(key : String | Symbol) : String?
+    @form.get?(key)
+  end
+
+  def get_all(key)
+    @form.get_all(key)
+  end
+
+  def get_all?(key : String | Symbol)
+    @form.get_all?(key)
+  end
+
+  def nested(key) : Hash(String, String)
+    @form.nested(key)
+  end
+
+  def nested?(key : String | Symbol) : Hash(String, String)
+    @form.nested?(key)
+  end
+
+  def nested_arrays(key) : Hash(String, Array(String))
+    @form.nested_arrays(key)
+  end
+
+  def nested_arrays?(key : String | Symbol) : Hash(String, Array(String))
+    @form.nested_arrays?(key)
+  end
+
+  def many_nested(key) : Array(Hash(String, String))
+    @form.many_nested(key)
+  end
+
+  def many_nested?(key : String | Symbol) : Array(Hash(String, String))
+    @form.many_nested?(key)
+  end
+
+  private def build_form(io)
+    headers = HTTP::Headers{
+      "Content-Type" => "application/x-www-form-urlencoded"
+    }
+
+    request = HTTP::Request.new("POST", "/", headers, io.rewind)
+    Lucky::Params.new(request)
   end
 
   private def add_param(uri_params, name, value : Nil)
