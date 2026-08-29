@@ -146,10 +146,6 @@ struct FakeParams
   end
 
   private def build_many(params)
-    Array(String).new.tap do |array|
-      params.each do |param|
-        array << param if param.is_a?(String)
-      end
-    end
+    params.map { |param| to_param(param) }
   end
 end
