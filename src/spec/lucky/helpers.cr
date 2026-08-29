@@ -43,6 +43,8 @@ def fake_file(content, filename : String? = nil) : Lucky::UploadedFile
     "Content-Disposition" => %(form-data; name="file"; filename="#{filename}")
   }
 
-  part = HTTP::FormData::Part.new(headers, IO::Memory.new(content))
+  io = content.is_a?(IO) ? content : IO::Memory.new(content)
+  part = HTTP::FormData::Part.new(headers, io)
+
   Lucky::UploadedFile.new(part)
 end
