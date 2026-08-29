@@ -28,6 +28,26 @@ struct FakeParams
     new(params)
   end
 
+  def get(key)
+    get?(key).not_nil!
+  end
+
+  def get?(key : String | Symbol) : String?
+    @hash[key.to_s]?.try do |string|
+      string if string.is_a?(String)
+    end
+  end
+
+  def get_all(key)
+    get_all?(key).not_nil!
+  end
+
+  def get_all?(key : String | Symbol)
+    @hash[key.to_s]?.try do |array|
+      array if array.is_a?(Array(String))
+    end
+  end
+
   def nested(key) : Hash(String, String)
     nested?(key)
   end
@@ -54,14 +74,6 @@ struct FakeParams
     end
   end
 
-  def nested_file(key) : Hash(String, String)
-    nested_file?(key)
-  end
-
-  def nested_file?(key : String | Symbol) : Hash(String, String)
-    nested?(key)
-  end
-
   def many_nested(key) : Array(Hash(String, String))
     many_nested?(key)
   end
@@ -72,28 +84,36 @@ struct FakeParams
     end || Array(Hash(String, String)).new
   end
 
-  def get(key)
-    get?(key).not_nil!
+  def get_file(key)
+    get_file?(key)
   end
 
-  def get?(key : String | Symbol) : String?
-    @hash[key.to_s]?.try do |string|
-      string if string.is_a?(String)
-    end
-  end
-
-  def get_all(key)
-    get_all?(key).not_nil!
-  end
-
-  def get_all?(key : String | Symbol)
-    @hash[key.to_s]?.try do |array|
-      array if array.is_a?(Array(String))
-    end
+  def get_file?(key)
+    get?(key)
   end
 
   def get_all_files(key)
-    get_all(key)
+    get_all_files?(key)
+  end
+
+  def get_all_files?(key)
+    get_all?(key)
+  end
+
+  def nested_file(key) : Hash(String, String)
+    nested_file?(key)
+  end
+
+  def nested_file?(key : String | Symbol) : Hash(String, String)
+    nested?(key)
+  end
+
+  def nested_array_files(key)
+    nested_array_files?(key)
+  end
+
+  def nested_array_files?(key)
+    nested_array?(key)
   end
 
   private def build_nested(params)
