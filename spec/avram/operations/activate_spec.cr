@@ -20,7 +20,7 @@ describe Lucille::Activate do
   it "activates user in the future" do
     active_at = 2.days.from_now.to_utc
 
-    CreateUser.create(fake_params(user: {
+    CreateUser.create(fake_form(user: {
       email: "me@example.net",
       level: :admin,
       active_at: active_at
