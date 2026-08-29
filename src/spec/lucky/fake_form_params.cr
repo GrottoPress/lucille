@@ -77,7 +77,7 @@ struct FakeFormParams
     end
   end
 
-  private def add_param(uri_params, name, value : Array | Tuple)
+  private def add_param(uri_params, name, value : Indexable)
     value.each_with_index do |item, i|
       case item
       when Hash, NamedTuple

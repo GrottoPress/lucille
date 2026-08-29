@@ -77,7 +77,7 @@ struct FakeMultipartParams
     end
   end
 
-  private def add_field(builder, name, value : Array | Tuple)
+  private def add_field(builder, name, value : Indexable)
     value.each_with_index do |item, i|
       case item
       when Hash, NamedTuple

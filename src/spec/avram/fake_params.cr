@@ -14,9 +14,9 @@ struct FakeParams
       when Nil
       when Hash, NamedTuple
         @hash[key.to_s] = build_nested(value)
-      when Array(String), Tuple(String)
+      when Indexable(String)
         @hash[key.to_s] = build_many(value)
-      when Array, Tuple
+      when Indexable
         @hash[key.to_s] = build_many_nested(value)
       else
         @hash[key.to_s] = to_param(value)
