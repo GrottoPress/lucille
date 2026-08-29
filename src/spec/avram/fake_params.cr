@@ -104,7 +104,7 @@ struct FakeParams
   end
 
   def nested_array_files?(key)
-    nested_array?(key)
+    nested_arrays?(key)
   end
 
   private def build_params(params : Hash | NamedTuple)
