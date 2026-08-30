@@ -127,6 +127,7 @@
 
 - #### Lucky
 
+  - `#fake_file`: Creates an uploaded file
   - `#fake_form`: Create form params
   - `#fake_json`: Creates JSON params
   - `#fake_multipart`: Creates multipart params
