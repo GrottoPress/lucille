@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Changed
 - Replace `#params` and `#nested_params` spec helpers with `#fake_params`
 - Require a nesting key when creating nested params with `#fake_params`
+- Rename `__enum` macro to `string_enum`; `__enum` remains as a deprecated alias
 
 ### Fixed
 - Fix compile error when `FakeParams.new` is called without arguments

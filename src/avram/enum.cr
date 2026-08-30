@@ -6,8 +6,8 @@
 # Besides, you couldn't make sense of the numbers if you peeked
 # into the database
 #
-# `__enum` saves enum members as `String` instead.
-macro __enum(enum_name, &block)
+# `string_enum` saves enum members as `String` instead.
+macro string_enum(enum_name, &block)
   struct {{ enum_name }}
     private enum Raw
       {{ block.body }}
@@ -74,5 +74,12 @@ macro __enum(enum_name, &block)
       class Criteria(T, V) < String::Lucky::Criteria(T, V)
       end
     end
+  end
+end
+
+@[Deprecated("Use `string_enum` instead")]
+macro __enum(enum_name, &block)
+  string_enum {{ enum_name }} do
+    {{ block.body }}
   end
 end

@@ -1,6 +1,6 @@
 require "../spec_helper"
 
-describe ".__enum" do
+describe ".string_enum" do
   describe ".parse" do
     it "parses enum" do
       level = User::Level.new(:author)

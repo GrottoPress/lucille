@@ -44,7 +44,7 @@
 
 - #### Macros
 
-  - `__enum`: Creates an *Avram* adapter that saves enums to the database as `String`
+  - `string_enum`: Creates an *Avram* adapter that saves enums to the database as `String`
 
 - #### Validations
 

@@ -2,7 +2,7 @@ class User < BaseModel
   include Carbon::Emailable
   include Lucille::StatusColumns
 
-  __enum Level do
+  string_enum Level do
     Admin
     Author
   end
