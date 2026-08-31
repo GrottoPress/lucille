@@ -4,13 +4,11 @@ struct FakeFormParams
   @form : Lucky::Params
 
   def initialize(params)
-    io = IO::Memory.new
-
-    URI::Params.build(io) do |uri_params|
-      params.each { |name, value| add_param(uri_params, name.to_s, value) }
+    uri_params = URI::Params.build do |builder|
+      params.each { |name, value| add_param(builder, name.to_s, value) }
     end
 
-    @form = build_form(io)
+    @form = build_form(uri_params)
   end
 
   def self.new(**params)
@@ -59,36 +57,36 @@ struct FakeFormParams
     @form.many_nested?(key)
   end
 
-  private def build_form(io)
+  private def build_form(uri_params)
     headers = HTTP::Headers{
       "Content-Type" => "application/x-www-form-urlencoded"
     }
 
-    request = HTTP::Request.new("POST", "/", headers, io.rewind)
+    request = HTTP::Request.new("POST", "/", headers, uri_params)
     Lucky::Params.new(request)
   end
 
-  private def add_param(uri_params, name, value : Nil)
+  private def add_param(builder, name, value : Nil)
   end
 
-  private def add_param(uri_params, name, value : Hash | NamedTuple)
+  private def add_param(builder, name, value : Hash | NamedTuple)
     value.each do |key, nested_value|
-      add_param(uri_params, "#{name}:#{key}", nested_value)
+      add_param(builder, "#{name}:#{key}", nested_value)
     end
   end
 
-  private def add_param(uri_params, name, value : Indexable)
+  private def add_param(builder, name, value : Indexable)
     value.each_with_index do |item, i|
       case item
       when Hash, NamedTuple
-        item.each { |k, v| add_param(uri_params, "#{name}[#{i}]:#{k}", v) }
+        item.each { |k, v| add_param(builder, "#{name}[#{i}]:#{k}", v) }
       else
-        add_param(uri_params, "#{name}[]", item)
+        add_param(builder, "#{name}[]", item)
       end
     end
   end
 
-  private def add_param(uri_params, name, value)
-    uri_params.add name, to_param(value)
+  private def add_param(builder, name, value)
+    builder.add name, to_param(value)
   end
 end
