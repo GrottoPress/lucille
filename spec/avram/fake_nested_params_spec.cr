@@ -1,13 +1,13 @@
 require "../spec_helper"
 
-describe FakeParams do
+describe FakeNestedParams do
   it "creates new empty params" do
     # Ensures no compile error:
     #   ```
     #   Error: can't infer block return type
     #   ```
 
-    FakeParams.new.get?("none").should be_nil
+    FakeNestedParams.new.get?("none").should be_nil
   end
 
   it "encodes time into value acceptable by the time adapter" do
@@ -20,7 +20,7 @@ describe FakeParams do
 
   describe "#get?" do
     it "returns string for a given key" do
-      params = FakeParams.new({"name" => "Alesia"})
+      params = fake_params({"name" => "Alesia"})
 
       params.get?(:name).should eq("Alesia")
       params.get?(:missing).should be_nil
@@ -29,7 +29,7 @@ describe FakeParams do
 
   describe "#get_all?" do
     it "returns array for a given key" do
-      params = FakeParams.new({files: ["photo.jpg"]})
+      params = fake_params({files: ["photo.jpg"]})
 
       params.get_all?(:files).should eq(["photo.jpg"])
       params.get_all?("missing").should be_nil
@@ -37,35 +37,38 @@ describe FakeParams do
   end
 
   describe "#nested?" do
-    it "returns string values" do
-      params = FakeParams.new(name: "Alesia", age: "35")
+    it "returns string values for a given key" do
+      params = fake_params({"user" => {name: "Alesia", age: "35"}})
 
       params.nested(:user).should eq({"name" => "Alesia", "age" => "35"})
+      params.nested(:missing).should be_empty
     end
   end
 
   describe "#nested_arrays?" do
-    it "returns array values" do
-      params = FakeParams.new({name: "Alesia", tags: ["a", "b"]})
+    it "returns array values for a given key" do
+      params = fake_params(user: {name: "Alesia", tags: ["a", "b"]})
 
       params.nested_arrays(:user).should eq({"tags" => ["a", "b"]})
+      params.nested_arrays(:missing).should be_empty
     end
   end
 
   describe "#many_nested?" do
-    it "returns an array of hashes" do
-      params = FakeParams.new({name: "photo.jpg"})
+    it "returns an array of hashes for a given key" do
+      params = fake_params(files: [{name: "photo.jpg"}])
 
       params.many_nested("files").should(eq [{"name" => "photo.jpg"}])
+      params.many_nested(:missing).should be_empty
     end
   end
 
   describe "#get_file?" do
     it "returns uploaded file for a given key" do
       avatar = fake_file("image-bytes", "avatar.png")
-      params = FakeParams.new(avatar: avatar)
+      params = fake_params(avatar: avatar)
 
-      params.get_file(:avatar).should_not be_nil
+      params.get_file?(:avatar).should_not be_nil
       params.get_file(:avatar).filename.should eq("avatar.png")
       params.get_file?(:missing).should be_nil
     end
@@ -74,32 +77,35 @@ describe FakeParams do
   describe "#get_all_files?" do
     it "returns array of uploaded files for a given key" do
       doc = fake_file("doc-bytes", "doc.pdf")
-      params = FakeParams.new(docs: [doc])
+      params = fake_params(docs: [doc])
 
-      params.get_all_files(:docs).should_not be_nil
+      params.get_all_files?(:docs).should_not be_nil
       params.get_all_files(:docs).map(&.filename).should eq(["doc.pdf"])
       params.get_all_files?(:missing).should be_nil
     end
   end
 
   describe "#nested_file?" do
-    it "returns uploaded files" do
+    it "returns uploaded files for a given key" do
       avatar = fake_file("image-bytes", "avatar.png")
-      params = FakeParams.new({:name => "Alesia", :avatar => avatar})
+      params = fake_params({"user" => {:name => "Alesia", :avatar => avatar}})
 
       params.nested_file(:user)["avatar"].filename.should eq("avatar.png")
       params.nested_file(:user).keys.should eq(["avatar"])
+      params.nested_file("missing").should be_empty
     end
   end
 
   describe "#nested_array_files?" do
-    it "returns array of uploaded files" do
+    it "returns array of uploaded files for a given key" do
       photo = fake_file("photo-bytes", "photo.jpg")
-      params = FakeParams.new(photos: [photo])
+      params = fake_params(user: {photos: [photo]})
 
-      params.nested_array_files?(:user)["photos"]
+      params.nested_array_files(:user)["photos"]
         .map(&.filename)
         .should(eq ["photo.jpg"])
+
+      params.nested_array_files(:missing).should be_empty
     end
   end
 end

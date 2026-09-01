@@ -1,10 +1,17 @@
-struct FakeParams
+struct FakeNestedParams
   include Avram::Paramable
 
   def initialize(params)
     @hash = Hash(String, Union(
       String,
       Array(String),
+      Hash(String, Union(
+        String,
+        Array(String),
+        Avram::Uploadable,
+        Array(Avram::Uploadable)
+      )),
+      Array(Hash(String, String)),
       Avram::Uploadable,
       Array(Avram::Uploadable)
     )).new
@@ -45,8 +52,9 @@ struct FakeParams
 
   def nested?(key : String | Symbol) : Hash(String, String)
     Hash(String, String).new.tap do |params|
-      @hash.each do |_key, _value|
-        params[_key] = _value if _value.is_a?(String)
+      @hash[key.to_s]?.try do |hash|
+        next unless hash.is_a?(Hash)
+        hash.each { |k, v| params[k] = v if v.is_a?(String) }
       end
     end
   end
@@ -57,8 +65,9 @@ struct FakeParams
 
   def nested_arrays?(key : String | Symbol) : Hash(String, Array(String))
     Hash(String, Array(String)).new.tap do |params|
-      @hash.each do |_key, _value|
-        params[_key] = _value if _value.is_a?(Array(String))
+      @hash[key.to_s]?.try do |hash|
+        next unless hash.is_a?(Hash)
+        hash.each { |k, v| params[k] = v if v.is_a?(Array(String)) }
       end
     end
   end
@@ -68,7 +77,9 @@ struct FakeParams
   end
 
   def many_nested?(key : String | Symbol) : Array(Hash(String, String))
-    [nested?(key)]
+    @hash[key.to_s]?.try do |array|
+      array if array.is_a?(Array(Hash(String, String)))
+    end || Array(Hash(String, String)).new
   end
 
   def get_file(key)
@@ -96,9 +107,10 @@ struct FakeParams
   end
 
   def nested_file?(key : String | Symbol) : Hash(String, Avram::Uploadable)
-    Hash(String, Avram::Uploadable).new.tap do |hash|
-      @hash.each do |_key, _value|
-        hash[_key] = _value if _value.is_a?(Avram::Uploadable)
+    Hash(String, Avram::Uploadable).new.tap do |files|
+      @hash[key.to_s]?.try do |hash|
+        next unless hash.is_a?(Hash)
+        hash.each { |k, v| files[k] = v if v.is_a?(Avram::Uploadable) }
       end
     end
   end
@@ -108,9 +120,10 @@ struct FakeParams
   end
 
   def nested_array_files?(key : String | Symbol)
-    Hash(String, Array(Avram::Uploadable)).new.tap do |hash|
-      @hash.each do |_key, _value|
-        hash[_key] = _value if _value.is_a?(Array(Avram::Uploadable))
+    Hash(String, Array(Avram::Uploadable)).new.tap do |files|
+      @hash[key.to_s]?.try do |hash|
+        next unless hash.is_a?(Hash)
+        hash.each { |k, v| files[k] = v if v.is_a?(Array(Avram::Uploadable)) }
       end
     end
   end

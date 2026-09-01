@@ -9,24 +9,23 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 - Add `FakeParams.new(NamedTuple)` overload
-- Add support for nested params to `FakeParams`
-- Add support for many nested params to `FakeParams`
+- Add `FakeNestedParams.new(NamedTuple)` overload
+- Add support for regular params to `FakeNestedParams`
+- Add support for many nested params to `FakeNestedParams`
 - Add support for uploaded files to `FakeParams`
+- Add support for uploaded files to `FakeNestedParams`
 - Add `FakeFormParams` and `#fake_form` spec helper
 - Add `FakeMultipartParams` and `#fake_multipart` spec helper
 - Add `#fake_json` spec helper
 - Add `Lucille::ToParam` spec mixin
 
 ### Changed
-- Replace `#params` and `#nested_params` spec helpers with `#fake_params`
 - Require a nesting key when creating nested params with `#fake_params`
-- Rename `__enum` macro to `string_enum`; `__enum` remains as a deprecated alias
+- Deprecate `.__enum` macro; replaced with `.string_enum`.
+- Deprecate `#params` and `#nested_params` spec helpers; replaced with `#fake_params`.
 
 ### Fixed
 - Fix compile error when `FakeParams.new` is called without arguments
-
-### Removed
-- Remove `FakeNestedParams`
 
 ## [1.4.1] - 2025-06-05
 
