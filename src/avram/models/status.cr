@@ -25,7 +25,7 @@ module Lucille::Status
       @active_time <= time && !active?(time)
     end
 
-      # Active in the future (from the perspective of `time`)
+    # Active in the future (from the perspective of `time`)
     def pending?(at time : Time = Time.utc) : Bool
       return false if @inactive_time.try(&.<= @active_time)
       @active_time > time
