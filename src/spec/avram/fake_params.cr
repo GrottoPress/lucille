@@ -115,27 +115,6 @@ struct FakeParams
     end
   end
 
-  private def build_params(params : Hash | NamedTuple)
-    Hash(String, Union(
-      String,
-      Array(String),
-      Avram::Uploadable,
-      Array(Avram::Uploadable)
-    )).new.tap do |hash|
-      params.to_h.each do |key, value|
-        hash[key.to_s] = build_nested_value(value)
-      end
-    end
-  end
-
-  private def build_params(params : Indexable(Hash) | Indexable(NamedTuple))
-    params.compact_map do |param|
-      hash = Hash(String, String).new
-      param.to_h.each { |key, value| hash[key.to_s] = to_param(value) }
-      hash unless hash.empty?
-    end
-  end
-
   private def build_params(params : Indexable(Avram::Uploadable))
     Array(Avram::Uploadable).new.tap do |array|
       params.each { |param| array << param }
@@ -152,23 +131,5 @@ struct FakeParams
 
   private def build_params(params)
     to_param(params)
-  end
-
-  private def build_nested_value(value : Avram::Uploadable)
-    value
-  end
-
-  private def build_nested_value(value : Indexable(Avram::Uploadable))
-    Array(Avram::Uploadable).new.tap do |array|
-      value.each { |param| array << param }
-    end
-  end
-
-  private def build_nested_value(value : Indexable)
-    value.map { |item| to_param(item) }
-  end
-
-  private def build_nested_value(value)
-    to_param(value)
   end
 end
