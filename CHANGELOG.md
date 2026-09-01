@@ -20,7 +20,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Add `Lucille::ToParam` spec mixin
 
 ### Changed
-- Require a nesting key when creating nested params with `#fake_params`
 - Deprecate `.__enum` macro; replaced with `.string_enum`.
 - Deprecate `#params` and `#nested_params` spec helpers; replaced with `#fake_params`.
 
