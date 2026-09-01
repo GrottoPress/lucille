@@ -77,7 +77,7 @@ macro string_enum(enum_name, &block)
   end
 end
 
-@[Deprecated("Use `string_enum` instead")]
+@[Deprecated("Use string_enum instead")]
 macro __enum(enum_name, &block)
   string_enum {{ enum_name }} do
     {{ block.body }}
