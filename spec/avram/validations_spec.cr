@@ -45,6 +45,12 @@ describe Avram::Validations do
           param: nil,
           value: "user.name@domain.tLD",
           param_key: "user"
+        ),
+        Avram::Attribute(String).new(
+          :email,
+          param: nil,
+          value: "user-name@domain.tLD",
+          param_key: "user"
         )
       }
 
@@ -84,6 +90,12 @@ describe Avram::Validations do
           :email,
           param: nil,
           value: "user..name@domain.com",
+          param_key: "user"
+        ),
+        Avram::Attribute(String).new(
+          :email,
+          param: nil,
+          value: "-user@domain.com",
           param_key: "user"
         ),
         Avram::Attribute(String).new(

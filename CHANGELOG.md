@@ -26,6 +26,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Fixed
 - Fix compile error when `FakeParams.new` is called without arguments
 
+## [Unreleased] - 
+
+### Fixed
+- Validations: Allow hyphens in email local-parts
+
 ## [1.4.1] - 2025-06-05
 
 ### Added

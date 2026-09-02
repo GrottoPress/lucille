@@ -6,7 +6,7 @@ class String
   def email? : Bool
     address, _, domain = partition('@')
     return false if address.empty? || address.bytesize > 64 || !domain.domain?
-    address.matches?(/^[a-z\_](?:[a-z0-9\_]*(?<!\.)\.?)*(?<!\.)$/i)
+    address.matches?(/^[a-z\_](?:[a-z0-9\_\-]*(?<!\.)\.?)*(?<![\-\.])$/i)
   end
 
   # Reference: https://en.wikipedia.org/wiki/Domain_Name_System
