@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Add `QueryPattern`
 - Add `Lucille::Preloader` mixin
 - Add `Lucille::ResponseFilter` mixin
+- Add `Lucille::QueryFilter` mixin
 
 ### Changed
 - Set defaults for `.needs` arguments
