@@ -114,6 +114,10 @@
 
   - `Lucille::Serializer`: It's a `module`, so you can create serializer with `struct`s.
 
+- #### Preloaders
+
+  - `Lucille::Preloader`: Allows preloading associations based on request parameters
+
 ### Spec
 
 - #### Avram
