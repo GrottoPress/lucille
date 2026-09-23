@@ -1,6 +1,6 @@
 module Lucille::SetUserIdFromUser
   macro included
-    needs user : User?
+    needs user : User? = nil
 
     before_save do
       set_user_id

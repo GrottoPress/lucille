@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased] - 
 
 ### Changed
+- Set defaults for `.needs` arguments
 - Bump minimum required *Lucky* version to 1.5
 - Bump minimum required *Avram* version to 1.5
 
