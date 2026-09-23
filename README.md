@@ -114,6 +114,10 @@
 
   - `Lucille::Serializer`: It's a `module`, so you can create serializer with `struct`s.
 
+- #### Response Filters
+
+  - `Lucille::ResponseFilter`: Enables GraphQL-like filtering of responses based on request parameters
+
 - #### Preloaders
 
   - `Lucille::Preloader`: Allows preloading associations based on request parameters
